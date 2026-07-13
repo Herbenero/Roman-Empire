@@ -563,7 +563,7 @@
       top: -6px;
       right: -2px;
       font-size: 0.76rem;
-      color: var(--gold-2);
+      color: #ffffff;
       text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
     }
 
@@ -1347,8 +1347,8 @@
           .join("") +
         `
         <div class="legend-item">
-          <span class="legend-dot" style="background:transparent; border-color:rgba(217,179,106,.5)"></span>
-          Shield = gold ring
+          <span class="legend-dot" style="background:transparent; border-color:rgba(255,255,255,.6)"></span>
+          Shield = white ring
         </div>
       `;
     }
@@ -1479,14 +1479,14 @@
         if (seg.shield) {
           const shieldRing = document.createElementNS("http://www.w3.org/2000/svg", "path");
           shieldRing.setAttribute("d", arcPath(104, 112, start + 1.2, end - 1.2));
-          shieldRing.setAttribute("fill", "rgba(241,210,154,.98)");
+          shieldRing.setAttribute("fill", "rgba(255,255,255,.92)");
           shieldRing.setAttribute("stroke", "rgba(255,255,255,.24)");
           shieldRing.setAttribute("stroke-width", ".8");
           boardGroup.appendChild(shieldRing);
 
           const shieldOuter = document.createElementNS("http://www.w3.org/2000/svg", "path");
           shieldOuter.setAttribute("d", arcPath(214, 226, start + 1.2, end - 1.2));
-          shieldOuter.setAttribute("fill", "rgba(241,210,154,.92)");
+          shieldOuter.setAttribute("fill", "rgba(255,255,255,.82)");
           shieldOuter.setAttribute("stroke", "rgba(255,255,255,.2)");
           shieldOuter.setAttribute("stroke-width", ".8");
           boardGroup.appendChild(shieldOuter);
