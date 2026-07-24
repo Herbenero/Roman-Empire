@@ -969,15 +969,11 @@
 
   function playerColor(playerId) {
     const p = state.players.find((x) => x.id === playerId);
-    return p ? p.color : "#666";
+    return p ? p.color : "#333235";
   }
 
   function sanitizeNames(text) {
-    return text
-      .split("\n")
-      .map((s) => s.trim())
-      .filter(Boolean)
-      .slice(0, 10);
+    return text.split("\n").map((s) => s.trim()).filter(Boolean).slice(0, 10);
   }
 
   function formatHit(mult, num) {
@@ -1096,13 +1092,12 @@
         } else {
           if (multiplier === 3) {
             seg.shield = false;
-            message = `${player.name} hit Triple ${num}; shield was broken but remains under their empire.`;
+            message = `${player.name} hit Triple ${num}; shield was broken but segment remains under their empire.`;
           } else {
             message = `${player.name} struck their own shielded ${formatHit(multiplier, num)}. No change.`;
           }
         }
       } else {
-        // Enemy segment raid logic
         const defenderName = state.players.find(p => p.id === seg.owner)?.name || "Enemy";
         if (seg.shield) {
           if (multiplier === 3) {
@@ -1127,7 +1122,6 @@
     state.dartsThrown += 1;
     addLog(message);
 
-    // Reset multiplier to Single (1x) default after hit
     setMultiplier(1);
     renderAll();
   }
@@ -1175,6 +1169,117 @@
 
     els.winnerModal.classList.add("open");
     els.winnerModal.setAttribute("aria-hidden", "false");
+  }
+
+  // --- DARTBOARD SVG GENERATION ---
+  function renderDartboard() {
+    const svg = els.dartboard;
+    svg.innerHTML = "";
+
+    const cx = 0, cy = 0;
+    const rOuter = 210, rDoubleOuter = 170, rDoubleInner = 158;
+    const rTripleOuter = 107, rTripleInner = 95;
+    const rBullOuter = 32, rBullInner = 13;
+
+    // Background circle
+    const bg = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    bg.setAttribute("cx", "0");
+    bg.setAttribute("cy", "0");
+    bg.setAttribute("r", rOuter);
+    bg.setAttribute("fill", "#1c1a18");
+    bg.setAttribute("stroke", "rgba(217, 179, 106, 0.3)");
+    bg.setAttribute("stroke-width", "4");
+    svg.appendChild(bg);
+
+    // Render 20 Segment Wedges
+    BOARD_ORDER.forEach((num, index) => {
+      const startAngle = (index * 18 - 99) * (Math.PI / 180);
+      const endAngle = ((index + 1) * 18 - 99) * (Math.PI / 180);
+      
+      const seg = state.board[num] || { owner: null, shield: false };
+      const fillColor = seg.owner ? playerColor(seg.owner) : (index % 2 === 0 ? "#282522" : "#1a1816");
+
+      const pathData = describeWedge(cx, cy, rBullOuter, rDoubleOuter, startAngle, endAngle);
+      const wedge = document.createElementNS("http://www.w3.org/2000/svg", "path");
+      wedge.setAttribute("d", pathData);
+      wedge.setAttribute("fill", fillColor);
+      wedge.setAttribute("stroke", "rgba(217, 179, 106, 0.2)");
+      wedge.setAttribute("stroke-width", "1.5");
+      wedge.style.cursor = "pointer";
+      wedge.onclick = () => processHit(num, state.activeMultiplier);
+
+      svg.appendChild(wedge);
+
+      // Shield Ring Indicator
+      if (seg.shield) {
+        const midAngle = (startAngle + endAngle) / 2;
+        const shieldR = (rDoubleOuter + rBullOuter) / 2;
+        const sx = cx + shieldR * Math.cos(midAngle);
+        const sy = cy + shieldR * Math.sin(midAngle);
+
+        const shieldRing = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+        shieldRing.setAttribute("cx", sx);
+        shieldRing.setAttribute("cy", sy);
+        shieldRing.setAttribute("r", "12");
+        shieldRing.setAttribute("fill", "rgba(217, 179, 106, 0.25)");
+        shieldRing.setAttribute("stroke", "#d9b36a");
+        shieldRing.setAttribute("stroke-width", "2.5");
+        svg.appendChild(shieldRing);
+      }
+
+      // Outer Number Labels
+      const midAngle = (startAngle + endAngle) / 2;
+      const textR = rOuter - 22;
+      const tx = cx + textR * Math.cos(midAngle);
+      const ty = cy + textR * Math.sin(midAngle);
+
+      const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+      text.setAttribute("x", tx);
+      text.setAttribute("y", ty + 5);
+      text.setAttribute("text-anchor", "middle");
+      text.setAttribute("fill", seg.owner ? "#fff" : "#d7c8b0");
+      text.setAttribute("font-size", "14");
+      text.setAttribute("font-weight", "800");
+      text.setAttribute("font-family", "Inter, sans-serif");
+      text.textContent = num;
+      text.style.pointerEvents = "none";
+      svg.appendChild(text);
+    });
+
+    // Outer Bull Ring
+    const bullOuter = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    bullOuter.setAttribute("cx", "0");
+    bullOuter.setAttribute("cy", "0");
+    bullOuter.setAttribute("r", rBullOuter);
+    bullOuter.setAttribute("fill", "#8f2d21");
+    bullOuter.setAttribute("stroke", "rgba(217, 179, 106, 0.4)");
+    bullOuter.setAttribute("stroke-width", "2");
+    bullOuter.style.cursor = "pointer";
+    bullOuter.onclick = () => processHit("bull", state.activeMultiplier);
+    svg.appendChild(bullOuter);
+
+    // Inner Bullseye
+    const bullInner = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    bullInner.setAttribute("cx", "0");
+    bullInner.setAttribute("cy", "0");
+    bullInner.setAttribute("r", rBullInner);
+    bullInner.setAttribute("fill", "#d9b36a");
+    bullInner.style.cursor = "pointer";
+    bullInner.onclick = () => processHit("bull", state.activeMultiplier);
+    svg.appendChild(bullInner);
+  }
+
+  function describeWedge(cx, cy, r1, r2, a1, a2) {
+    const x1 = cx + r1 * Math.cos(a1);
+    const y1 = cy + r1 * Math.sin(a1);
+    const x2 = cx + r2 * Math.cos(a1);
+    const y2 = cy + r2 * Math.sin(a1);
+    const x3 = cx + r2 * Math.cos(a2);
+    const y3 = cy + r2 * Math.sin(a2);
+    const x4 = cx + r1 * Math.cos(a2);
+    const y4 = cy + r1 * Math.sin(a2);
+
+    return `M ${x1} ${y1} L ${x2} ${y2} A ${r2} ${r2} 0 0 1 ${x3} ${y3} L ${x4} ${y4} A ${r1} ${r1} 0 0 0 ${x1} ${y1} Z`;
   }
 
   function renderButtons() {
@@ -1244,6 +1349,7 @@
   }
 
   function renderAll() {
+    renderDartboard();
     renderButtons();
     renderScoreboard();
     renderStatus();
@@ -1252,8 +1358,7 @@
 
   function init() {
     state.board = initBoard();
-    
-    // Event listeners
+
     els.startBtn.addEventListener("click", startGame);
     els.resetBtn.addEventListener("click", resetGame);
     els.endTurnBtn.addEventListener("click", advanceTurn);
