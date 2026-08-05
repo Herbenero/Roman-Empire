@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Roman Empire</title>
-  <meta name="description" content="Roman Empire dart game webapp with scoreboard, dartboard, round tracking, shields, doubles, triples, undo, and multiplayer support." />
+  <meta name="description" content="Roman Empire dart game webapp with scoreboard, dartboard, round tracking, shields, doubles, triples, quads, undo, and multiplayer support." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -38,9 +38,7 @@
       min-height: 100%;
     }
     body::before {
-      content: "";
-      position: fixed; inset: 0;
-      pointer-events: none; opacity: 0.07;
+      content: ""; position: fixed; inset: 0; pointer-events: none; opacity: 0.07;
       background: linear-gradient(transparent 0 96%, rgba(255, 255, 255, 0.18) 96% 100%), linear-gradient(90deg, transparent 0 96%, rgba(255, 255, 255, 0.14) 96% 100%);
       background-size: 28px 28px;
       mask-image: radial-gradient(circle at center, black 35%, transparent 95%);
@@ -48,7 +46,8 @@
     .app {
       width: min(var(--max), calc(100% - 28px));
       margin: 18px auto 28px;
-      display: grid; gap: 18px;
+      display: grid;
+      gap: 18px;
       grid-template-columns: 360px 1fr 340px;
       align-items: start;
     }
@@ -68,11 +67,12 @@
       line-height: 1; letter-spacing: 0.12em; color: rgba(217, 179, 106, 0.09); z-index: -1;
     }
     .eyebrow {
-      display: inline-flex; align-items: center; gap: 8px;
-      color: var(--gold-2); text-transform: uppercase; font-weight: 800;
-      letter-spacing: 0.18em; font-size: 0.73rem;
+      display: inline-flex; align-items: center; gap: 8px; color: var(--gold-2);
+      text-transform: uppercase; font-weight: 800; letter-spacing: 0.18em; font-size: 0.73rem;
     }
-    .eyebrow::before { content: ""; width: 28px; height: 1px; background: linear-gradient(90deg, var(--gold), transparent); display: inline-block; }
+    .eyebrow::before {
+      content: ""; width: 28px; height: 1px; background: linear-gradient(90deg, var(--gold), transparent); display: inline-block;
+    }
     h1, h2, h3 { margin: 0; font-family: "Cinzel", serif; line-height: 0.95; letter-spacing: 0.01em; }
     h1 { margin-top: 10px; font-size: clamp(2.4rem, 5vw, 4.6rem); font-weight: 800; color: var(--ink); text-wrap: balance; }
     .sub { margin-top: 12px; color: var(--muted); line-height: 1.55; max-width: 34ch; font-size: 0.98rem; }
@@ -85,10 +85,16 @@
       padding: 14px 14px; font: inherit; transition: 0.2s ease;
     }
     textarea { min-height: 112px; resize: vertical; }
-    input:focus, textarea:focus, select:focus { border-color: rgba(241, 210, 154, 0.58); box-shadow: 0 0 0 4px rgba(217, 179, 106, 0.12); transform: translateY(-1px); }
+    select option { background: var(--bg-2); color: var(--ink); }
+    input:focus, textarea:focus, select:focus {
+      border-color: rgba(241, 210, 154, 0.58); box-shadow: 0 0 0 4px rgba(217, 179, 106, 0.12); transform: translateY(-1px);
+    }
     .hint { color: var(--ash); font-size: 0.85rem; line-height: 1.45; margin-top: 6px; }
     .btn-row { display: flex; flex-wrap: wrap; gap: 10px; }
-    button { appearance: none; border: none; cursor: pointer; font: inherit; border-radius: 16px; color: var(--ink); transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease, opacity 0.18s ease; }
+    button {
+      appearance: none; border: none; cursor: pointer; font: inherit; border-radius: 16px; color: var(--ink);
+      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease, opacity 0.18s ease;
+    }
     button:hover { transform: translateY(-2px); }
     button:active { transform: translateY(0) scale(0.98); }
     button:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
@@ -96,10 +102,16 @@
     .btn-secondary { background: rgba(255, 248, 239, 0.06); border: 1px solid rgba(217, 179, 106, 0.16); padding: 12px 15px; font-weight: 700; }
     .status { padding: 18px 20px 20px; display: grid; gap: 14px; }
     .status-top { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
-    .metric { padding: 16px; border-radius: 18px; background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01)); border: 1px solid rgba(217, 179, 106, 0.14); min-height: 94px; display: flex; flex-direction: column; justify-content: space-between; }
+    .metric {
+      padding: 16px; border-radius: 18px; background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+      border: 1px solid rgba(217, 179, 106, 0.14); min-height: 94px; display: flex; flex-direction: column; justify-content: space-between;
+    }
     .metric span { color: var(--muted); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.13em; font-weight: 700; }
     .metric strong { font-size: clamp(1.35rem, 2vw, 2rem); font-weight: 800; color: var(--ink); }
-    .current-turn { display: grid; grid-template-columns: auto 1fr auto; gap: 14px; align-items: center; padding: 16px 18px; border-radius: 20px; border: 1px solid rgba(217, 179, 106, 0.16); background: linear-gradient(90deg, rgba(217, 179, 106, 0.09), rgba(255, 255, 255, 0.02)); }
+    .current-turn {
+      display: grid; grid-template-columns: auto 1fr auto; gap: 14px; align-items: center; padding: 16px 18px;
+      border-radius: 20px; border: 1px solid rgba(217, 179, 106, 0.16); background: linear-gradient(90deg, rgba(217, 179, 106, 0.09), rgba(255, 255, 255, 0.02));
+    }
     .player-chip { width: 18px; height: 18px; border-radius: 50%; box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.06), inset 0 0 0 2px rgba(255, 255, 255, 0.2); flex: 0 0 auto; }
     .turn-name { font-weight: 800; font-size: 1.05rem; }
     .turn-sub { color: var(--muted); font-size: 0.84rem; margin-top: 2px; }
@@ -154,7 +166,7 @@
       <div class="panel brand">
         <div class="eyebrow">Hellcastle Archery Arena</div>
         <h1>Roman Empire</h1>
-        <p class="sub">Conquer the board in a single dart. Claim free segments, fortify your own with shields, and raid enemy territory with doubles and triples.</p>
+        <p class="sub">Conquer the board in a single dart. Claim free segments, fortify your own with shields, and raid enemy territory with doubles, triples, and quads.</p>
       </div>
 
       <section class="panel setup" aria-labelledby="setupTitle">
@@ -167,6 +179,14 @@
             <label for="playerNames">Players</label>
             <textarea id="playerNames" placeholder="Enter one player per line&#10;Cassius&#10;Livia&#10;Maximus"></textarea>
             <div class="hint">Each player gets a unique empire color for their name and claimed segments.</div>
+          </div>
+          <div>
+            <label for="boardType">Board Selector</label>
+            <select id="boardType">
+              <option value="basic">Basic Board (1x, 2x, 3x)</option>
+              <option value="quad">Quad Board (1x, 2x, 3x, 4x)</option>
+            </select>
+            <div class="hint">Selecting Quad Board unlocks the 4× Quad hit multiplier.</div>
           </div>
           <div>
             <label for="roundCount">Rounds (6–20)</label>
@@ -237,9 +257,12 @@
             <button class="pill active" data-multiplier="1" id="singleMode" type="button">1× Single</button>
             <button class="pill" data-multiplier="2" id="doubleMode" type="button">2× Double</button>
             <button class="pill" data-multiplier="3" id="tripleMode" type="button">3× Triple</button>
+            <button class="pill" data-multiplier="4" id="quadMode" type="button" style="display: none;">4× Quad</button>
           </div>
         </div>
+
         <div class="number-grid" id="numberButtons"></div>
+
         <div class="action-row">
           <button id="bullBtn" class="dart-btn special" type="button">Bull</button>
           <button id="missBtn" class="dart-btn utility" type="button">Miss</button>
@@ -284,13 +307,14 @@
     const SEGMENTS = Array.from({ length: 20 }, (_, i) => i + 1);
     const BOARD_ORDER = [20, 1, 18, 4, 13, 6, 10, 15, 2, 17, 3, 19, 7, 16, 8, 11, 14, 9, 12, 5];
     const PLAYER_COLORS = [
-      "#27D7E9", "#BA4C3B", "#4F8CFF", "#4FB477", "#C86BFA", 
+      "#27D7E9", "#BA4C3B", "#4F8CFF", "#4FB477", "#C86BFA",
       "#F28F3B", "#24B7B0", "#E75A8A", "#9BD14D", "#8C7BFF"
     ];
     const DARTS_PER_TURN = 3;
 
     const state = {
       players: [],
+      boardType: "basic",
       totalRounds: 6,
       currentPlayerIndex: 0,
       currentRound: 1,
@@ -306,6 +330,7 @@
 
     const els = {
       playerNames: document.getElementById("playerNames"),
+      boardType: document.getElementById("boardType"),
       roundCount: document.getElementById("roundCount"),
       startBtn: document.getElementById("startBtn"),
       resetBtn: document.getElementById("resetBtn"),
@@ -331,7 +356,8 @@
       closeModalBtn: document.getElementById("closeModalBtn"),
       singleMode: document.getElementById("singleMode"),
       doubleMode: document.getElementById("doubleMode"),
-      tripleMode: document.getElementById("tripleMode")
+      tripleMode: document.getElementById("tripleMode"),
+      quadMode: document.getElementById("quadMode")
     };
 
     function deepClone(obj) {
@@ -347,19 +373,22 @@
     }
 
     function pushHistory() {
-      state.history.push(deepClone({
-        players: state.players,
-        totalRounds: state.totalRounds,
-        currentPlayerIndex: state.currentPlayerIndex,
-        currentRound: state.currentRound,
-        dartsThrown: state.dartsThrown,
-        dartsThisTurn: state.dartsThisTurn,
-        activeMultiplier: state.activeMultiplier,
-        gameStarted: state.gameStarted,
-        gameEnded: state.gameEnded,
-        board: state.board,
-        log: state.log
-      }));
+      state.history.push(
+        deepClone({
+          players: state.players,
+          boardType: state.boardType,
+          totalRounds: state.totalRounds,
+          currentPlayerIndex: state.currentPlayerIndex,
+          currentRound: state.currentRound,
+          dartsThrown: state.dartsThrown,
+          dartsThisTurn: state.dartsThisTurn,
+          activeMultiplier: state.activeMultiplier,
+          gameStarted: state.gameStarted,
+          gameEnded: state.gameEnded,
+          board: state.board,
+          log: state.log
+        })
+      );
     }
 
     function undoLast() {
@@ -386,6 +415,7 @@
     }
 
     function formatHit(mult, num) {
+      if (mult === 4) return `Quad ${num}`;
       if (mult === 3) return `Triple ${num}`;
       if (mult === 2) return `Double ${num}`;
       return `Single ${num}`;
@@ -407,6 +437,7 @@
         name,
         color: PLAYER_COLORS[i % PLAYER_COLORS.length]
       }));
+      state.boardType = els.boardType.value;
       state.totalRounds = rounds;
       state.currentPlayerIndex = 0;
       state.currentRound = 1;
@@ -419,12 +450,13 @@
       state.history = [];
       state.log = [];
 
-      addLog("The campaign begins. " + state.players.map((p) => p.name).join(", ") + " enter the arena.");
+      addLog(`The campaign begins on the ${state.boardType === "quad" ? "Quad" : "Basic"} Board. ` + state.players.map((p) => p.name).join(", ") + " enter the arena.");
       renderAll();
     }
 
     function resetGame() {
       state.players = [];
+      state.boardType = els.boardType.value;
       state.totalRounds = 6;
       state.currentPlayerIndex = 0;
       state.currentRound = 1;
@@ -448,9 +480,11 @@
 
     function setMultiplier(mult) {
       state.activeMultiplier = mult;
-      [els.singleMode, els.doubleMode, els.tripleMode].forEach((btn) => {
-        const active = Number(btn.dataset.multiplier) === mult;
-        btn.classList.toggle("active", active);
+      [els.singleMode, els.doubleMode, els.tripleMode, els.quadMode].forEach((btn) => {
+        if (btn) {
+          const active = Number(btn.dataset.multiplier) === mult;
+          btn.classList.toggle("active", active);
+        }
       });
     }
 
@@ -470,7 +504,6 @@
         alert(`You have already thrown ${DARTS_PER_TURN} darts this turn. Please advance to the next player.`);
         return;
       }
-
       pushHistory();
       const player = getCurrentPlayer();
       const playerId = player.id;
@@ -487,7 +520,6 @@
 
         if (seg.owner === null) {
           seg.owner = playerId;
-          // Both Double (2x) and Triple (3x) automatically claim AND shield free segments
           if (multiplier >= 2) {
             seg.shield = true;
             message = `${player.name} claimed and shielded free segment ${formatHit(multiplier, num)}!`;
@@ -500,21 +532,20 @@
             seg.shield = true;
             message = `${player.name} reinforced ${formatHit(multiplier, num)} and activated its shield.`;
           } else {
-            if (multiplier === 3) {
+            if (multiplier >= 3) {
               seg.shield = false;
-              message = `${player.name} hit Triple ${num}; shield was broken but segment remains under their empire.`;
+              message = `${player.name} hit ${formatHit(multiplier, num)}; shield was broken but segment remains under their empire.`;
             } else {
               message = `${player.name} struck their own shielded ${formatHit(multiplier, num)}. No change.`;
             }
           }
         } else {
-          // Raid logic against enemy-owned segment
-          const defenderName = state.players.find(p => p.id === seg.owner)?.name || "Enemy";
+          const defenderName = state.players.find((p) => p.id === seg.owner)?.name || "Enemy";
           if (seg.shield) {
-            if (multiplier === 3) {
+            if (multiplier >= 3) {
               seg.owner = playerId;
-              seg.shield = false;
-              message = `${player.name} hit Triple ${num}! Bypassed shield and conquered ${defenderName}'s segment!`;
+              seg.shield = (multiplier === 4);
+              message = `${player.name} hit ${formatHit(multiplier, num)}! Bypassed shield and conquered ${defenderName}'s segment!`;
             } else if (multiplier === 2) {
               seg.shield = false;
               message = `${player.name} hit Double ${num} and stripped ${defenderName}'s shield!`;
@@ -523,7 +554,7 @@
             }
           } else {
             seg.owner = playerId;
-            seg.shield = (multiplier === 3);
+            seg.shield = (multiplier >= 3);
             message = `${player.name} conquered ${defenderName}'s segment ${formatHit(multiplier, num)}!`;
           }
         }
@@ -532,8 +563,6 @@
       state.dartsThisTurn += 1;
       state.dartsThrown += 1;
       addLog(message);
-
-      // Multiplier defaults back to Single (1x) after throw
       setMultiplier(1);
       renderAll();
     }
@@ -541,21 +570,17 @@
     function advanceTurn() {
       if (!state.gameStarted || state.gameEnded) return;
       pushHistory();
-
       state.dartsThisTurn = 0;
       state.currentPlayerIndex += 1;
-
       if (state.currentPlayerIndex >= state.players.length) {
         state.currentPlayerIndex = 0;
         state.currentRound += 1;
       }
-
       if (state.currentRound > state.totalRounds) {
         endGame();
       } else {
         addLog(`Round ${state.currentRound}: ${getCurrentPlayer().name}'s turn.`);
       }
-
       setMultiplier(1);
       renderAll();
     }
@@ -567,220 +592,314 @@
         return { player: p, count: owned };
       });
       scores.sort((a, b) => b.count - a.count);
-
       const maxCount = scores[0]?.count || 0;
       const winners = scores.filter((s) => s.count === maxCount);
 
-      els.winnerSummary.textContent = winners.length > 1
-        ? `A tie for imperial glory with ${maxCount} segments each!`
-        : `${winners[0].player.name} claims ultimate dominion over the empire with ${maxCount} segments!`;
+      els.winnerSummary.textContent =
+        winners.length > 1
+          ? `A tie for imperial glory with ${maxCount} segments claimed (${Math.round((maxCount / 20) * 100)}% of the board)!`
+          : `${winners[0].player.name} commands the realm with ${maxCount} segments claimed (${Math.round((maxCount / 20) * 100)}% of the board)!`;
 
       els.winnerChips.innerHTML = winners
-        .map((w) => `<div class="winner-chip" style="background:${w.player.color}">${w.player.name}</div>`)
+        .map(
+          (w) =>
+            `<div class="winner-chip" style="background:${w.player.color}">${w.player.name}</div>`
+        )
         .join("");
 
       els.winnerModal.classList.add("open");
       els.winnerModal.setAttribute("aria-hidden", "false");
     }
 
+    function renderNumberButtons() {
+      els.numberButtons.innerHTML = SEGMENTS.map((num) => {
+        return `<button class="dart-btn" type="button" data-num="${num}">${num}</button>`;
+      }).join("");
+
+      els.numberButtons.querySelectorAll("button").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const num = Number(btn.dataset.num);
+          processHit(num, state.activeMultiplier);
+        });
+      });
+    }
+
+    function renderStatus() {
+      const activeP = getCurrentPlayer();
+      els.quadMode.style.display = state.boardType === "quad" ? "inline-block" : "none";
+
+      if (!state.gameStarted) {
+        els.roundDisplay.textContent = "—";
+        els.dartCountDisplay.textContent = "0";
+        els.throwsLeftDisplay.textContent = "—";
+        els.currentPlayerName.textContent = "No game started";
+        els.currentPlayerSub.textContent = "Enter players and rounds to begin.";
+        els.currentTurnChip.style.background = "#777";
+        els.endTurnBtn.disabled = true;
+        return;
+      }
+
+      els.roundDisplay.textContent = state.gameEnded ? "Done" : `${state.currentRound} / ${state.totalRounds}`;
+      els.dartCountDisplay.textContent = String(state.dartsThrown);
+      els.throwsLeftDisplay.textContent = String(DARTS_PER_TURN - state.dartsThisTurn);
+
+      if (activeP) {
+        els.currentPlayerName.textContent = activeP.name;
+        els.currentPlayerSub.textContent = `Dart ${Math.min(state.dartsThisTurn + 1, DARTS_PER_TURN)} of ${DARTS_PER_TURN}`;
+        els.currentTurnChip.style.background = activeP.color;
+      }
+      els.endTurnBtn.disabled = state.gameEnded;
+    }
+
+    function renderScoreboard() {
+      if (!state.players || state.players.length === 0) {
+        els.scoreList.innerHTML = `<div class="empty-state">No active empire. Start a match to populate scores.</div>`;
+        return;
+      }
+
+      const activeP = getCurrentPlayer();
+      els.scoreList.innerHTML = state.players
+        .map((p) => {
+          const ownedNums = getOwnedSegments(p.id);
+          const count = ownedNums.length;
+          const pct = Math.round((count / 20) * 100);
+          const isActive = activeP && activeP.id === p.id;
+
+          const segTags = ownedNums
+            .map((num) => {
+              const isShielded = state.board[num].shield;
+              return `<span class="mini-seg ${isShielded ? "shielded" : ""}" style="background:${p.color}">${num}</span>`;
+            })
+            .join("");
+
+          return `
+            <div class="score-item ${isActive ? "active" : ""}">
+              <div class="score-top">
+                <div class="player-chip" style="background:${p.color}"></div>
+                <div>
+                  <div class="score-name">${p.name}</div>
+                  <div class="score-meta">${count} of 20 segments</div>
+                </div>
+                <div class="pct">${pct}%</div>
+              </div>
+              <div class="owned-line">${segTags || '<span class="empty-state">No segments claimed yet</span>'}</div>
+            </div>
+          `;
+        })
+        .join("");
+    }
+
+    function renderFeed() {
+      if (!state.log || state.log.length === 0) {
+        els.feedList.innerHTML = `<div class="empty-state">Battle history will appear here.</div>`;
+        return;
+      }
+      els.feedList.innerHTML = state.log
+        .map((item) => `<div class="feed-item">${item.text}</div>`)
+        .join("");
+    }
+
+    function renderLegend() {
+      if (!state.players || state.players.length === 0) {
+        els.legend.innerHTML = `<div class="empty-state">No empires yet.</div>`;
+        return;
+      }
+      els.legend.innerHTML = state.players
+        .map(
+          (p) => `
+          <div style="display:inline-flex; align-items:center; gap:8px; font-size:0.86rem; font-weight:700;">
+            <span style="width:12px; height:12px; border-radius:50%; background:${p.color}; display:inline-block;"></span>
+            <span>${p.name}</span>
+          </div>
+        `
+        )
+        .join("");
+    }
+
+    function polarToCartesian(r, deg) {
+      const rad = ((deg - 90) * Math.PI) / 180;
+      return {
+        x: r * Math.cos(rad),
+        y: r * Math.sin(rad)
+      };
+    }
+
+    function makeArcPath(rInner, rOuter, startAngle, endAngle) {
+      const p1 = polarToCartesian(rOuter, startAngle);
+      const p2 = polarToCartesian(rOuter, endAngle);
+      const p3 = polarToCartesian(rInner, endAngle);
+      const p4 = polarToCartesian(rInner, startAngle);
+
+      const largeArc = endAngle - startAngle > 180 ? 1 : 0;
+
+      return [
+        `M ${p1.x} ${p1.y}`,
+        `A ${rOuter} ${rOuter} 0 ${largeArc} 1 ${p2.x} ${p2.y}`,
+        `L ${p3.x} ${p3.y}`,
+        `A ${rInner} ${rInner} 0 ${largeArc} 0 ${p4.x} ${p4.y}`,
+        `Z`
+      ].join(" ");
+    }
+
     function renderDartboard() {
       const svg = els.dartboard;
       svg.innerHTML = "";
 
-      const cx = 0, cy = 0;
-      const rOuter = 210, rDoubleOuter = 170;
-      const rBullOuter = 32, rBullInner = 13;
+      const rOuterRing = 240;
+      const rDoubleOuter = 210;
+      const rDoubleInner = 190;
+      const rTripleOuter = 130;
+      const rTripleInner = 110;
+      const rOuterBull = 32;
+      const rInnerBull = 14;
 
-      const bg = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-      bg.setAttribute("cx", "0");
-      bg.setAttribute("cy", "0");
-      bg.setAttribute("r", rOuter);
-      bg.setAttribute("fill", "#1c1a18");
-      bg.setAttribute("stroke", "rgba(217, 179, 106, 0.3)");
-      bg.setAttribute("stroke-width", "4");
-      svg.appendChild(bg);
+      const bgCircle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+      bgCircle.setAttribute("cx", "0");
+      bgCircle.setAttribute("cy", "0");
+      bgCircle.setAttribute("r", String(rOuterRing));
+      bgCircle.setAttribute("fill", "#171514");
+      bgCircle.setAttribute("stroke", "rgba(217,179,106,0.35)");
+      bgCircle.setAttribute("stroke-width", "4");
+      svg.appendChild(bgCircle);
 
-      BOARD_ORDER.forEach((num, index) => {
-        const startAngle = (index * 18 - 99) * (Math.PI / 180);
-        const endAngle = ((index + 1) * 18 - 99) * (Math.PI / 180);
-        
-        const seg = state.board[num] || { owner: null, shield: false };
-        const fillColor = seg.owner ? playerColor(seg.owner) : (index % 2 === 0 ? "#282522" : "#1a1816");
+      const angleStep = 360 / 20;
 
-        const pathData = describeWedge(cx, cy, rBullOuter, rDoubleOuter, startAngle, endAngle);
-        const wedge = document.createElementNS("http://www.w3.org/2000/svg", "path");
-        wedge.setAttribute("d", pathData);
-        wedge.setAttribute("fill", fillColor);
-        wedge.setAttribute("stroke", "rgba(217, 179, 106, 0.2)");
-        wedge.setAttribute("stroke-width", "1.5");
-        wedge.style.cursor = "pointer";
-        wedge.onclick = () => processHit(num, state.activeMultiplier);
+      BOARD_ORDER.forEach((num, idx) => {
+        const startAngle = idx * angleStep - angleStep / 2;
+        const endAngle = startAngle + angleStep;
+        const segData = state.board[num] || { owner: null, shield: false };
+        const ownerColor = segData.owner ? playerColor(segData.owner) : null;
+        const defaultColor = idx % 2 === 0 ? "#262320" : "#3b3631";
+        const fillColor = ownerColor || defaultColor;
 
-        svg.appendChild(wedge);
+        const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+        path.setAttribute("d", makeArcPath(rOuterBull, rDoubleOuter, startAngle, endAngle));
+        path.setAttribute("fill", fillColor);
+        path.setAttribute("stroke", "rgba(217, 179, 106, 0.18)");
+        path.setAttribute("stroke-width", "1.5");
+        path.style.cursor = "pointer";
+        path.addEventListener("click", () => processHit(num, state.activeMultiplier));
+        svg.appendChild(path);
 
-        if (seg.shield) {
+        const doubleBand = document.createElementNS("http://www.w3.org/2000/svg", "path");
+        doubleBand.setAttribute("d", makeArcPath(rDoubleInner, rDoubleOuter, startAngle, endAngle));
+        doubleBand.setAttribute("fill", ownerColor ? ownerColor : idx % 2 === 0 ? "#8f2d21" : "#2f5d47");
+        doubleBand.setAttribute("opacity", ownerColor ? "0.95" : "0.7");
+        doubleBand.setAttribute("stroke", "rgba(255,255,255,0.12)");
+        doubleBand.style.cursor = "pointer";
+        doubleBand.addEventListener("click", () => processHit(num, 2));
+        svg.appendChild(doubleBand);
+
+        const tripleBand = document.createElementNS("http://www.w3.org/2000/svg", "path");
+        tripleBand.setAttribute("d", makeArcPath(rTripleInner, rTripleOuter, startAngle, endAngle));
+        tripleBand.setAttribute("fill", ownerColor ? ownerColor : idx % 2 === 0 ? "#8f2d21" : "#2f5d47");
+        tripleBand.setAttribute("opacity", ownerColor ? "0.95" : "0.7");
+        tripleBand.setAttribute("stroke", "rgba(255,255,255,0.12)");
+        tripleBand.style.cursor = "pointer";
+        tripleBand.addEventListener("click", () => processHit(num, 3));
+        svg.appendChild(tripleBand);
+
+        if (segData.shield) {
           const midAngle = (startAngle + endAngle) / 2;
-          const shieldR = (rDoubleOuter + rBullOuter) / 2;
-          const sx = cx + shieldR * Math.cos(midAngle);
-          const sy = cy + shieldR * Math.sin(midAngle);
+          const shieldRadius = (rTripleOuter + rDoubleInner) / 2;
+          const pt = polarToCartesian(shieldRadius, midAngle);
 
-          const shieldRing = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-          shieldRing.setAttribute("cx", sx);
-          shieldRing.setAttribute("cy", sy);
-          shieldRing.setAttribute("r", "12");
-          shieldRing.setAttribute("fill", "rgba(217, 179, 106, 0.25)");
-          shieldRing.setAttribute("stroke", "#d9b36a");
-          shieldRing.setAttribute("stroke-width", "2.5");
-          svg.appendChild(shieldRing);
+          const shieldCircle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+          shieldCircle.setAttribute("cx", String(pt.x));
+          shieldCircle.setAttribute("cy", String(pt.y));
+          shieldCircle.setAttribute("r", "11");
+          shieldCircle.setAttribute("fill", "#111113");
+          shieldCircle.setAttribute("stroke", "#f1d29a");
+          shieldCircle.setAttribute("stroke-width", "2.5");
+          svg.appendChild(shieldCircle);
+
+          const star = document.createElementNS("http://www.w3.org/2000/svg", "text");
+          star.setAttribute("x", String(pt.x));
+          star.setAttribute("y", String(pt.y + 4));
+          star.setAttribute("text-anchor", "middle");
+          star.setAttribute("fill", "#f1d29a");
+          star.setAttribute("font-size", "11");
+          star.setAttribute("font-weight", "bold");
+          star.textContent = "✦";
+          svg.appendChild(star);
         }
 
-        const midAngle = (startAngle + endAngle) / 2;
-        const textR = rOuter - 22;
-        const tx = cx + textR * Math.cos(midAngle);
-        const ty = cy + textR * Math.sin(midAngle);
-
+        const labelAngle = (startAngle + endAngle) / 2;
+        const labelPos = polarToCartesian(225, labelAngle);
         const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
-        text.setAttribute("x", tx);
-        text.setAttribute("y", ty + 5);
+        text.setAttribute("x", String(labelPos.x));
+        text.setAttribute("y", String(labelPos.y + 5));
         text.setAttribute("text-anchor", "middle");
-        text.setAttribute("fill", seg.owner ? "#fff" : "#d7c8b0");
+        text.setAttribute("fill", "#f6ead6");
         text.setAttribute("font-size", "14");
         text.setAttribute("font-weight", "800");
         text.setAttribute("font-family", "Inter, sans-serif");
-        text.textContent = num;
-        text.style.pointerEvents = "none";
+        text.textContent = String(num);
         svg.appendChild(text);
       });
 
-      const bullOuter = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-      bullOuter.setAttribute("cx", "0");
-      bullOuter.setAttribute("cy", "0");
-      bullOuter.setAttribute("r", rBullOuter);
-      bullOuter.setAttribute("fill", "#8f2d21");
-      bullOuter.setAttribute("stroke", "rgba(217, 179, 106, 0.4)");
-      bullOuter.setAttribute("stroke-width", "2");
-      bullOuter.style.cursor = "pointer";
-      bullOuter.onclick = () => processHit("bull", state.activeMultiplier);
-      svg.appendChild(bullOuter);
+      const outerBull = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+      outerBull.setAttribute("cx", "0");
+      outerBull.setAttribute("cy", "0");
+      outerBull.setAttribute("r", String(rOuterBull));
+      outerBull.setAttribute("fill", "#2f5d47");
+      outerBull.setAttribute("stroke", "rgba(255,255,255,0.2)");
+      outerBull.style.cursor = "pointer";
+      outerBull.addEventListener("click", () => processHit("bull", 1));
+      svg.appendChild(outerBull);
 
-      const bullInner = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-      bullInner.setAttribute("cx", "0");
-      bullInner.setAttribute("cy", "0");
-      bullInner.setAttribute("r", rBullInner);
-      bullInner.setAttribute("fill", "#d9b36a");
-      bullInner.style.cursor = "pointer";
-      bullInner.onclick = () => processHit("bull", state.activeMultiplier);
-      svg.appendChild(bullInner);
-    }
-
-    function describeWedge(cx, cy, r1, r2, a1, a2) {
-      const x1 = cx + r1 * Math.cos(a1);
-      const y1 = cy + r1 * Math.sin(a1);
-      const x2 = cx + r2 * Math.cos(a1);
-      const y2 = cy + r2 * Math.sin(a1);
-      const x3 = cx + r2 * Math.cos(a2);
-      const y3 = cy + r2 * Math.sin(a2);
-      const x4 = cx + r1 * Math.cos(a2);
-      const y4 = cy + r1 * Math.sin(a2);
-
-      return `M ${x1} ${y1} L ${x2} ${y2} A ${r2} ${r2} 0 0 1 ${x3} ${y3} L ${x4} ${y4} A ${r1} ${r1} 0 0 0 ${x1} ${y1} Z`;
-    }
-
-    function renderButtons() {
-      els.numberButtons.innerHTML = SEGMENTS.map((n) => `
-        <button class="dart-btn" type="button" onclick="processHit(${n}, state.activeMultiplier)">
-          ${n}
-        </button>
-      `).join("");
-    }
-
-    function renderScoreboard() {
-      if (!state.players.length) {
-        els.scoreList.innerHTML = `<div class="empty-state">No players enrolled yet.</div>`;
-        return;
-      }
-
-      els.scoreList.innerHTML = state.players.map((p) => {
-        const owned = getOwnedSegments(p.id);
-        const isActive = state.gameStarted && getCurrentPlayer()?.id === p.id;
-        const pct = Math.round((owned.length / 20) * 100);
-
-        return `
-          <div class="score-item ${isActive ? "active" : ""}">
-            <div class="score-top">
-              <div class="player-chip" style="background:${p.color}"></div>
-              <div>
-                <div class="score-name">${p.name}</div>
-                <div class="score-meta">${owned.length} / 20 Segments</div>
-              </div>
-              <div class="pct">${pct}%</div>
-            </div>
-            <div class="owned-line">
-              ${owned.length ? owned.map(n => `
-                <span class="mini-seg ${state.board[n].shield ? "shielded" : ""}" style="background:${p.color}">
-                  ${n}
-                </span>
-              `).join("") : `<span class="empty-state">No territory claimed</span>`}
-            </div>
-          </div>
-        `;
-      }).join("");
-    }
-
-    function renderStatus() {
-      els.roundDisplay.textContent = state.gameStarted ? `${state.currentRound} / ${state.totalRounds}` : "—";
-      els.dartCountDisplay.textContent = state.dartsThrown;
-      els.throwsLeftDisplay.textContent = state.gameStarted ? DARTS_PER_TURN - state.dartsThisTurn : "—";
-
-      const cur = getCurrentPlayer();
-      if (cur && state.gameStarted && !state.gameEnded) {
-        els.currentPlayerName.textContent = cur.name;
-        els.currentPlayerSub.textContent = `Dart ${state.dartsThisTurn + 1} of ${DARTS_PER_TURN}`;
-        els.currentTurnChip.style.background = cur.color;
-        els.endTurnBtn.disabled = false;
-      } else {
-        els.currentPlayerName.textContent = state.gameEnded ? "Game Over" : "No game started";
-        els.currentPlayerSub.textContent = state.gameEnded ? "Check winner summary." : "Enter players and rounds to begin.";
-        els.currentTurnChip.style.background = "#777";
-        els.endTurnBtn.disabled = true;
-      }
-    }
-
-    function renderFeed() {
-      els.feedList.innerHTML = state.log.length
-        ? state.log.map((item) => `<div class="feed-item">${item.text}</div>`).join("")
-        : `<div class="empty-state">No battle activity logged.</div>`;
+      const innerBull = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+      innerBull.setAttribute("cx", "0");
+      innerBull.setAttribute("cy", "0");
+      innerBull.setAttribute("r", String(rInnerBull));
+      innerBull.setAttribute("fill", "#8f2d21");
+      innerBull.setAttribute("stroke", "rgba(255,255,255,0.3)");
+      innerBull.style.cursor = "pointer";
+      innerBull.addEventListener("click", () => processHit("bull", 1));
+      svg.appendChild(innerBull);
     }
 
     function renderAll() {
-      renderDartboard();
-      renderButtons();
-      renderScoreboard();
       renderStatus();
+      renderScoreboard();
       renderFeed();
+      renderLegend();
+      renderDartboard();
     }
 
-    function init() {
-      state.board = initBoard();
-
+    function setupEventListeners() {
       els.startBtn.addEventListener("click", startGame);
       els.resetBtn.addEventListener("click", resetGame);
-      els.endTurnBtn.addEventListener("click", advanceTurn);
-      els.nextPlayerBtn.addEventListener("click", advanceTurn);
+
+      els.singleMode.addEventListener("click", () => setMultiplier(1));
+      els.doubleMode.addEventListener("click", () => setMultiplier(2));
+      els.tripleMode.addEventListener("click", () => setMultiplier(3));
+      els.quadMode.addEventListener("click", () => setMultiplier(4));
+
+      els.boardType.addEventListener("change", (e) => {
+        state.boardType = e.target.value;
+        if (state.boardType !== "quad" && state.activeMultiplier === 4) {
+          setMultiplier(1);
+        }
+        renderStatus();
+      });
+
       els.bullBtn.addEventListener("click", () => processHit("bull", state.activeMultiplier));
       els.missBtn.addEventListener("click", () => processHit("miss", state.activeMultiplier));
       els.undoBtn.addEventListener("click", undoLast);
+      els.nextPlayerBtn.addEventListener("click", advanceTurn);
+      els.endTurnBtn.addEventListener("click", advanceTurn);
+
       els.closeModalBtn.addEventListener("click", () => {
         els.winnerModal.classList.remove("open");
         els.winnerModal.setAttribute("aria-hidden", "true");
       });
+    }
 
-      [els.singleMode, els.doubleMode, els.tripleMode].forEach((btn) => {
-        btn.addEventListener("click", () => {
-          setMultiplier(Number(btn.dataset.multiplier));
-        });
-      });
-
+    function init() {
+      renderNumberButtons();
+      setupEventListeners();
+      state.board = initBoard();
       renderAll();
     }
 
