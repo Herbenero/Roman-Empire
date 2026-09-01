@@ -657,7 +657,33 @@
         const num = Number(target);
         const seg = state.board[num];
 
-        if (seg.owner === null) {
+        if (seg.shield) {
+          // Shielded segment processing rules
+          const defenderName = seg.owner
+            ? (state.players.find((p) => p.id === seg.owner)?.name || "Enemy")
+            : "Unknown";
+
+          if (multiplier === 4) {
+            // Quad: Unshield, unclaimed, then claim and shield for thrower
+            seg.owner = playerId;
+            seg.shield = true;
+            message = `${player.name} hit Quad ${num}! Unshielded, freed, claimed, and shielded ${defenderName}'s segment!`;
+          } else if (multiplier === 3) {
+            // Triple: Unshield, unclaimed, then claim for thrower
+            seg.owner = playerId;
+            seg.shield = false;
+            message = `${player.name} hit Triple ${num}! Unshielded, freed, and claimed ${defenderName}'s segment!`;
+          } else if (multiplier === 2) {
+            // Double: Unshield and unclaimed (neutralized)
+            seg.owner = null;
+            seg.shield = false;
+            message = `${player.name} hit Double ${num}! Unshielded and freed ${defenderName}'s segment!`;
+          } else {
+            // Single: Repelled
+            message = `${player.name} hit Single ${num} against ${defenderName}'s shielded segment. Repelled!`;
+          }
+        } else if (seg.owner === null) {
+          // Unclaimed & unshielded target
           seg.owner = playerId;
           if (multiplier >= 2) {
             seg.shield = true;
@@ -667,35 +693,15 @@
             message = `${player.name} claimed ${formatHit(multiplier, num)} for the empire.`;
           }
         } else if (seg.owner === playerId) {
-          if (!seg.shield) {
-            seg.shield = true;
-            message = `${player.name} reinforced ${formatHit(multiplier, num)} and activated its shield.`;
-          } else {
-            if (multiplier >= 2) {
-              seg.shield = false;
-              message = `${player.name} hit ${formatHit(multiplier, num)}; shield was broken!`;
-            } else {
-              message = `${player.name} struck their own shielded ${formatHit(multiplier, num)}. No change.`;
-            }
-          }
+          // Unshielded target owned by active player
+          seg.shield = true;
+          message = `${player.name} reinforced ${formatHit(multiplier, num)} and activated its shield.`;
         } else {
+          // Unshielded target owned by opponent: free segment
           const defenderName = state.players.find((p) => p.id === seg.owner)?.name || "Enemy";
-          if (seg.shield) {
-            if (multiplier >= 3) {
-              seg.owner = null;
-              seg.shield = false;
-              message = `${player.name} hit ${formatHit(multiplier, num)}! Bypassed shield and freed ${defenderName}'s segment!`;
-            } else if (multiplier === 2) {
-              seg.shield = false;
-              message = `${player.name} hit Double ${num} and stripped ${defenderName}'s shield!`;
-            } else {
-              message = `${player.name} hit Single ${num} against ${defenderName}'s shielded segment. Repelled!`;
-            }
-          } else {
-            seg.owner = null;
-            seg.shield = false;
-            message = `${player.name} hit ${formatHit(multiplier, num)} and freed ${defenderName}'s segment!`;
-          }
+          seg.owner = null;
+          seg.shield = false;
+          message = `${player.name} hit ${formatHit(multiplier, num)} and freed ${defenderName}'s segment!`;
         }
       }
 
@@ -808,33 +814,19 @@
 
         svg.appendChild(path);
 
-        if (state.boardType === "quad") {
-          [quadR, tripleR, doubleR].forEach((r) => {
-            const ring = document.createElementNS("http://www.w3.org/2000/svg", "path");
-            const rx1 = Math.cos(radS) * r;
-            const ry1 = Math.sin(radS) * r;
-            const rx2 = Math.cos(radE) * r;
-            const ry2 = Math.sin(radE) * r;
-            ring.setAttribute("d", `M ${rx1} ${ry1} A ${r} ${r} 0 0 1 ${rx2} ${ry2}`);
-            ring.setAttribute("stroke", "rgba(255, 255, 255, 0.12)");
-            ring.setAttribute("stroke-width", "1");
-            ring.setAttribute("fill", "none");
-            svg.appendChild(ring);
-          });
-        } else {
-          [tripleR, doubleR].forEach((r) => {
-            const ring = document.createElementNS("http://www.w3.org/2000/svg", "path");
-            const rx1 = Math.cos(radS) * r;
-            const ry1 = Math.sin(radS) * r;
-            const rx2 = Math.cos(radE) * r;
-            const ry2 = Math.sin(radE) * r;
-            ring.setAttribute("d", `M ${rx1} ${ry1} A ${r} ${r} 0 0 1 ${rx2} ${ry2}`);
-            ring.setAttribute("stroke", "rgba(255, 255, 255, 0.12)");
-            ring.setAttribute("stroke-width", "1");
-            ring.setAttribute("fill", "none");
-            svg.appendChild(ring);
-          });
-        }
+        const ringRadiusList = state.boardType === "quad" ? [quadR, tripleR, doubleR] : [tripleR, doubleR];
+        ringRadiusList.forEach((r) => {
+          const ring = document.createElementNS("http://www.w3.org/2000/svg", "path");
+          const rx1 = Math.cos(radS) * r;
+          const ry1 = Math.sin(radS) * r;
+          const rx2 = Math.cos(radE) * r;
+          const ry2 = Math.sin(radE) * r;
+          ring.setAttribute("d", `M ${rx1} ${ry1} A ${r} ${r} 0 0 1 ${rx2} ${ry2}`);
+          ring.setAttribute("stroke", "rgba(255, 255, 255, 0.12)");
+          ring.setAttribute("stroke-width", "1");
+          ring.setAttribute("fill", "none");
+          svg.appendChild(ring);
+        });
 
         if (seg.shield) {
           const midAngle = startAngle + (anglePerSeg / 2);
