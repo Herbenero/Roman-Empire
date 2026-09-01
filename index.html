@@ -31,14 +31,19 @@
     }
     * { box-sizing: border-box; }
     html, body {
-      margin: 0; padding: 0;
+      margin: 0;
+      padding: 0;
       background: radial-gradient(circle at top, rgba(217, 179, 106, 0.08), transparent 26%), linear-gradient(180deg, #141315 0%, #111113 60%, #0d0c0e 100%);
       color: var(--ink);
       font-family: "Inter", sans-serif;
       min-height: 100%;
     }
     body::before {
-      content: ""; position: fixed; inset: 0; pointer-events: none; opacity: 0.07;
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.07;
       background: linear-gradient(transparent 0 96%, rgba(255, 255, 255, 0.18) 96% 100%), linear-gradient(90deg, transparent 0 96%, rgba(255, 255, 255, 0.14) 96% 100%);
       background-size: 28px 28px;
       mask-image: radial-gradient(circle at center, black 35%, transparent 95%);
@@ -62,16 +67,33 @@
     .left, .center, .right { display: grid; gap: 18px; }
     .brand { padding: 22px 22px 18px; position: relative; isolation: isolate; }
     .brand::after {
-      content: "SPQR"; position: absolute; right: 18px; top: 16px;
-      font-family: "Cinzel", serif; font-size: clamp(2rem, 5vw, 3.3rem);
-      line-height: 1; letter-spacing: 0.12em; color: rgba(217, 179, 106, 0.09); z-index: -1;
+      content: "SPQR";
+      position: absolute;
+      right: 18px;
+      top: 16px;
+      font-family: "Cinzel", serif;
+      font-size: clamp(2rem, 5vw, 3.3rem);
+      line-height: 1;
+      letter-spacing: 0.12em;
+      color: rgba(217, 179, 106, 0.09);
+      z-index: -1;
     }
     .eyebrow {
-      display: inline-flex; align-items: center; gap: 8px; color: var(--gold-2);
-      text-transform: uppercase; font-weight: 800; letter-spacing: 0.18em; font-size: 0.73rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--gold-2);
+      text-transform: uppercase;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      font-size: 0.73rem;
     }
     .eyebrow::before {
-      content: ""; width: 28px; height: 1px; background: linear-gradient(90deg, var(--gold), transparent); display: inline-block;
+      content: "";
+      width: 28px;
+      height: 1px;
+      background: linear-gradient(90deg, var(--gold), transparent);
+      display: inline-block;
     }
     h1, h2, h3 { margin: 0; font-family: "Cinzel", serif; line-height: 0.95; letter-spacing: 0.01em; }
     h1 { margin-top: 10px; font-size: clamp(2.4rem, 5vw, 4.6rem); font-weight: 800; color: var(--ink); text-wrap: balance; }
@@ -80,19 +102,33 @@
     .setup-grid { display: grid; gap: 14px; }
     label { display: block; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--gold-2); font-weight: 700; margin-bottom: 8px; }
     input, textarea, select {
-      width: 100%; border: none; outline: none; background: rgba(255, 248, 239, 0.055);
-      color: var(--ink); border: 1px solid rgba(217, 179, 106, 0.18); border-radius: 16px;
-      padding: 14px 14px; font: inherit; transition: 0.2s ease;
+      width: 100%;
+      border: none;
+      outline: none;
+      background: rgba(255, 248, 239, 0.055);
+      color: var(--ink);
+      border: 1px solid rgba(217, 179, 106, 0.18);
+      border-radius: 16px;
+      padding: 14px 14px;
+      font: inherit;
+      transition: 0.2s ease;
     }
     textarea { min-height: 112px; resize: vertical; }
     select option { background: var(--bg-2); color: var(--ink); }
     input:focus, textarea:focus, select:focus {
-      border-color: rgba(241, 210, 154, 0.58); box-shadow: 0 0 0 4px rgba(217, 179, 106, 0.12); transform: translateY(-1px);
+      border-color: rgba(241, 210, 154, 0.58);
+      box-shadow: 0 0 0 4px rgba(217, 179, 106, 0.12);
+      transform: translateY(-1px);
     }
     .hint { color: var(--ash); font-size: 0.85rem; line-height: 1.45; margin-top: 6px; }
     .btn-row { display: flex; flex-wrap: wrap; gap: 10px; }
     button {
-      appearance: none; border: none; cursor: pointer; font: inherit; border-radius: 16px; color: var(--ink);
+      appearance: none;
+      border: none;
+      cursor: pointer;
+      font: inherit;
+      border-radius: 16px;
+      color: var(--ink);
       transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease, opacity 0.18s ease;
     }
     button:hover { transform: translateY(-2px); }
@@ -103,53 +139,153 @@
     .status { padding: 18px 20px 20px; display: grid; gap: 14px; }
     .status-top { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
     .metric {
-      padding: 16px; border-radius: 18px; background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
-      border: 1px solid rgba(217, 179, 106, 0.14); min-height: 94px; display: flex; flex-direction: column; justify-content: space-between;
+      padding: 16px;
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+      border: 1px solid rgba(217, 179, 106, 0.14);
+      min-height: 94px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
     .metric span { color: var(--muted); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.13em; font-weight: 700; }
     .metric strong { font-size: clamp(1.35rem, 2vw, 2rem); font-weight: 800; color: var(--ink); }
     .current-turn {
-      display: grid; grid-template-columns: auto 1fr auto; gap: 14px; align-items: center; padding: 16px 18px;
-      border-radius: 20px; border: 1px solid rgba(217, 179, 106, 0.16); background: linear-gradient(90deg, rgba(217, 179, 106, 0.09), rgba(255, 255, 255, 0.02));
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 14px;
+      align-items: center;
+      padding: 16px 18px;
+      border-radius: 20px;
+      border: 1px solid rgba(217, 179, 106, 0.16);
+      background: linear-gradient(90deg, rgba(217, 179, 106, 0.09), rgba(255, 255, 255, 0.02));
     }
-    .player-chip { width: 18px; height: 18px; border-radius: 50%; box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.06), inset 0 0 0 2px rgba(255, 255, 255, 0.2); flex: 0 0 auto; }
+    .player-chip {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.06), inset 0 0 0 2px rgba(255, 255, 255, 0.2);
+      flex: 0 0 auto;
+    }
     .turn-name { font-weight: 800; font-size: 1.05rem; }
     .turn-sub { color: var(--muted); font-size: 0.84rem; margin-top: 2px; }
     .board-shell { padding: 18px; display: grid; gap: 14px; }
     .board-head { display: flex; justify-content: space-between; align-items: end; gap: 12px; padding: 4px 6px 0; }
     .board-head p { margin: 8px 0 0; color: var(--muted); font-size: 0.92rem; max-width: 44ch; line-height: 1.5; }
     .board-wrap { display: grid; place-items: center; padding: 8px 8px 4px; }
-    .board-box { width: min(100%, 660px); aspect-ratio: 1; position: relative; display: grid; place-items: center; filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.45)); }
+    .board-box {
+      width: min(100%, 660px);
+      aspect-ratio: 1;
+      position: relative;
+      display: grid;
+      place-items: center;
+      filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.45));
+    }
     svg { display: block; width: 100%; height: 100%; }
     .legend { display: flex; flex-wrap: wrap; gap: 10px; padding: 4px 6px 0; }
     .controls { padding: 18px; display: grid; gap: 14px; }
     .controls-header { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
     .mode-pills { display: flex; gap: 8px; flex-wrap: wrap; }
-    .pill { padding: 10px 14px; border-radius: 999px; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(217, 179, 106, 0.14); color: var(--stone); font-weight: 800; letter-spacing: 0.04em; }
-    .pill.active { background: linear-gradient(180deg, rgba(217, 179, 106, 0.22), rgba(217, 179, 106, 0.12)); color: var(--gold-2); box-shadow: 0 10px 24px rgba(217, 179, 106, 0.12); }
+    .pill {
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(217, 179, 106, 0.14);
+      color: var(--stone);
+      font-weight: 800;
+      letter-spacing: 0.04em;
+    }
+    .pill.active {
+      background: linear-gradient(180deg, rgba(217, 179, 106, 0.22), rgba(217, 179, 106, 0.12));
+      color: var(--gold-2);
+      box-shadow: 0 10px 24px rgba(217, 179, 106, 0.12);
+    }
     .number-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; }
-    .dart-btn { min-height: 58px; border-radius: 18px; font-weight: 800; font-size: 1rem; position: relative; overflow: hidden; background: linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.018)); border: 1px solid rgba(217, 179, 106, 0.14); color: var(--ink); }
+    .dart-btn {
+      min-height: 58px;
+      border-radius: 18px;
+      font-weight: 800;
+      font-size: 1rem;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.018));
+      border: 1px solid rgba(217, 179, 106, 0.14);
+      color: var(--ink);
+    }
     .dart-btn.special { background: linear-gradient(180deg, rgba(143, 45, 33, 0.28), rgba(143, 45, 33, 0.12)); border-color: rgba(186, 76, 59, 0.28); }
     .dart-btn.utility { background: linear-gradient(180deg, rgba(47, 93, 71, 0.25), rgba(47, 93, 71, 0.1)); border-color: rgba(98, 170, 133, 0.18); }
     .action-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
     .scoreboard { padding: 18px; display: grid; gap: 14px; }
     .score-list { display: grid; gap: 10px; }
-    .score-item { border-radius: 20px; border: 1px solid rgba(217, 179, 106, 0.14); background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01)); padding: 14px; display: grid; gap: 12px; transition: transform 0.2s ease, border-color 0.2s ease; }
+    .score-item {
+      border-radius: 20px;
+      border: 1px solid rgba(217, 179, 106, 0.14);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+      padding: 14px;
+      display: grid;
+      gap: 12px;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
     .score-item.active { border-color: rgba(241, 210, 154, 0.45); transform: translateY(-2px); box-shadow: 0 14px 28px rgba(0, 0, 0, 0.18); }
     .score-top { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 12px; }
     .score-name { font-weight: 800; font-size: 1rem; }
     .score-meta { color: var(--muted); font-size: 0.84rem; line-height: 1.35; }
     .pct { font-size: 1.25rem; font-weight: 900; color: var(--gold-2); text-align: right; }
     .owned-line { display: flex; flex-wrap: wrap; gap: 8px; }
-    .mini-seg { min-width: 34px; height: 34px; border-radius: 999px; display: inline-grid; place-items: center; padding: 0 10px; font-size: 0.85rem; font-weight: 800; color: #160f09; position: relative; border: 1px solid rgba(255, 255, 255, 0.22); }
-    .mini-seg.shielded::after { content: "✦"; position: absolute; top: -6px; right: -2px; font-size: 0.76rem; color: var(--gold-2); text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5); }
+    .mini-seg {
+      min-width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      display: inline-grid;
+      place-items: center;
+      padding: 0 10px;
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: #160f09;
+      position: relative;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+    }
+    .mini-seg.shielded::after {
+      content: "✦";
+      position: absolute;
+      top: -6px;
+      right: -2px;
+      font-size: 0.76rem;
+      color: var(--gold-2);
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+    }
     .empty-state { color: var(--ash); font-size: 0.92rem; padding: 6px 0 2px; }
     .feed { padding: 18px; display: grid; gap: 12px; }
     .feed-list { max-height: 310px; overflow: auto; display: grid; gap: 10px; padding-right: 4px; }
-    .feed-item { padding: 12px 13px; border-radius: 16px; background: rgba(255, 255, 255, 0.035); border: 1px solid rgba(217, 179, 106, 0.12); color: var(--stone); line-height: 1.45; font-size: 0.92rem; }
-    .modal { position: fixed; inset: 0; display: none; place-items: center; padding: 18px; background: rgba(8, 8, 10, 0.62); backdrop-filter: blur(10px); z-index: 30; }
+    .feed-item {
+      padding: 12px 13px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.035);
+      border: 1px solid rgba(217, 179, 106, 0.12);
+      color: var(--stone);
+      line-height: 1.45;
+      font-size: 0.92rem;
+    }
+    .modal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      place-items: center;
+      padding: 18px;
+      background: rgba(8, 8, 10, 0.62);
+      backdrop-filter: blur(10px);
+      z-index: 30;
+    }
     .modal.open { display: grid; }
-    .modal-card { width: min(680px, 100%); border-radius: 28px; border: 1px solid rgba(217, 179, 106, 0.18); background: radial-gradient(circle at top, rgba(217, 179, 106, 0.12), transparent 30%), linear-gradient(180deg, #1c1917 0%, #141214 100%); box-shadow: var(--shadow); padding: 26px; text-align: center; }
+    .modal-card {
+      width: min(680px, 100%);
+      border-radius: 28px;
+      border: 1px solid rgba(217, 179, 106, 0.18);
+      background: radial-gradient(circle at top, rgba(217, 179, 106, 0.12), transparent 30%), linear-gradient(180deg, #1c1917 0%, #141214 100%);
+      box-shadow: var(--shadow);
+      padding: 26px;
+      text-align: center;
+    }
     .modal-card h2 { font-size: clamp(2rem, 4vw, 3.4rem); color: var(--gold-2); }
     .winners { margin-top: 18px; display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; }
     .winner-chip { padding: 10px 14px; border-radius: 999px; font-weight: 800; color: #180f08; border: 1px solid rgba(255, 255, 255, 0.24); }
@@ -157,7 +293,9 @@
     .section-title { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
     .section-title h3 { font-size: 1.28rem; color: var(--stone); }
     .ghost { color: var(--ash); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.14em; font-weight: 700; }
-    @media (max-width: 1180px) { .app { grid-template-columns: 1fr; } }
+    @media (max-width: 1180px) {
+      .app { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
@@ -260,9 +398,7 @@
             <button class="pill" data-multiplier="4" id="quadMode" type="button" style="display: none;">4× Quad</button>
           </div>
         </div>
-
         <div class="number-grid" id="numberButtons"></div>
-
         <div class="action-row">
           <button id="bullBtn" class="dart-btn special" type="button">Bull</button>
           <button id="missBtn" class="dart-btn utility" type="button">Miss</button>
@@ -373,22 +509,20 @@
     }
 
     function pushHistory() {
-      state.history.push(
-        deepClone({
-          players: state.players,
-          boardType: state.boardType,
-          totalRounds: state.totalRounds,
-          currentPlayerIndex: state.currentPlayerIndex,
-          currentRound: state.currentRound,
-          dartsThrown: state.dartsThrown,
-          dartsThisTurn: state.dartsThisTurn,
-          activeMultiplier: state.activeMultiplier,
-          gameStarted: state.gameStarted,
-          gameEnded: state.gameEnded,
-          board: state.board,
-          log: state.log
-        })
-      );
+      state.history.push(deepClone({
+        players: state.players,
+        boardType: state.boardType,
+        totalRounds: state.totalRounds,
+        currentPlayerIndex: state.currentPlayerIndex,
+        currentRound: state.currentRound,
+        dartsThrown: state.dartsThrown,
+        dartsThisTurn: state.dartsThisTurn,
+        activeMultiplier: state.activeMultiplier,
+        gameStarted: state.gameStarted,
+        gameEnded: state.gameEnded,
+        board: state.board,
+        log: state.log
+      }));
     }
 
     function undoLast() {
@@ -424,6 +558,7 @@
     function startGame() {
       const names = sanitizeNames(els.playerNames.value);
       let rounds = parseInt(els.roundCount.value, 10);
+
       if (names.length < 2) {
         alert("Please enter at least 2 player names.");
         return;
@@ -437,6 +572,7 @@
         name,
         color: PLAYER_COLORS[i % PLAYER_COLORS.length]
       }));
+
       state.boardType = els.boardType.value;
       state.totalRounds = rounds;
       state.currentPlayerIndex = 0;
@@ -468,6 +604,7 @@
       state.board = initBoard();
       state.history = [];
       state.log = [];
+
       els.winnerModal.classList.remove("open");
       els.winnerModal.setAttribute("aria-hidden", "true");
       renderAll();
@@ -500,10 +637,12 @@
 
     function processHit(target, multiplier = 1) {
       if (!state.gameStarted || state.gameEnded) return;
+
       if (state.dartsThisTurn >= DARTS_PER_TURN) {
         alert(`You have already thrown ${DARTS_PER_TURN} darts this turn. Please advance to the next player.`);
         return;
       }
+
       pushHistory();
       const player = getCurrentPlayer();
       const playerId = player.id;
@@ -532,9 +671,9 @@
             seg.shield = true;
             message = `${player.name} reinforced ${formatHit(multiplier, num)} and activated its shield.`;
           } else {
-            if (multiplier >= 3) {
+            if (multiplier >= 2) {
               seg.shield = false;
-              message = `${player.name} hit ${formatHit(multiplier, num)}; shield was broken but segment remains under their empire.`;
+              message = `${player.name} hit ${formatHit(multiplier, num)}; shield was broken!`;
             } else {
               message = `${player.name} struck their own shielded ${formatHit(multiplier, num)}. No change.`;
             }
@@ -543,9 +682,9 @@
           const defenderName = state.players.find((p) => p.id === seg.owner)?.name || "Enemy";
           if (seg.shield) {
             if (multiplier >= 3) {
-              seg.owner = playerId;
-              seg.shield = (multiplier === 4);
-              message = `${player.name} hit ${formatHit(multiplier, num)}! Bypassed shield and conquered ${defenderName}'s segment!`;
+              seg.owner = null;
+              seg.shield = false;
+              message = `${player.name} hit ${formatHit(multiplier, num)}! Bypassed shield and freed ${defenderName}'s segment!`;
             } else if (multiplier === 2) {
               seg.shield = false;
               message = `${player.name} hit Double ${num} and stripped ${defenderName}'s shield!`;
@@ -553,9 +692,9 @@
               message = `${player.name} hit Single ${num} against ${defenderName}'s shielded segment. Repelled!`;
             }
           } else {
-            seg.owner = playerId;
-            seg.shield = (multiplier >= 3);
-            message = `${player.name} conquered ${defenderName}'s segment ${formatHit(multiplier, num)}!`;
+            seg.owner = null;
+            seg.shield = false;
+            message = `${player.name} hit ${formatHit(multiplier, num)} and freed ${defenderName}'s segment!`;
           }
         }
       }
@@ -569,120 +708,266 @@
 
     function advanceTurn() {
       if (!state.gameStarted || state.gameEnded) return;
+
       pushHistory();
       state.dartsThisTurn = 0;
       state.currentPlayerIndex += 1;
+
       if (state.currentPlayerIndex >= state.players.length) {
         state.currentPlayerIndex = 0;
         state.currentRound += 1;
       }
+
       if (state.currentRound > state.totalRounds) {
         endGame();
-      } else {
-        addLog(`Round ${state.currentRound}: ${getCurrentPlayer().name}'s turn.`);
+        return;
       }
-      setMultiplier(1);
+
+      addLog(`It is now ${getCurrentPlayer().name}'s turn (Round ${state.currentRound}/${state.totalRounds}).`);
       renderAll();
     }
 
     function endGame() {
       state.gameEnded = true;
-      const scores = state.players.map((p) => {
-        const owned = getOwnedSegments(p.id).length;
-        return { player: p, count: owned };
+      const stats = state.players.map((p) => {
+        const owned = getOwnedSegments(p.id);
+        return { ...p, owned, count: owned.length, pct: ((owned.length / 20) * 100).toFixed(1) };
       });
-      scores.sort((a, b) => b.count - a.count);
-      const maxCount = scores[0]?.count || 0;
-      const winners = scores.filter((s) => s.count === maxCount);
 
-      els.winnerSummary.textContent =
-        winners.length > 1
-          ? `A tie for imperial glory with ${maxCount} segments claimed (${Math.round((maxCount / 20) * 100)}% of the board)!`
-          : `${winners[0].player.name} commands the realm with ${maxCount} segments claimed (${Math.round((maxCount / 20) * 100)}% of the board)!`;
+      const maxCount = Math.max(...stats.map((s) => s.count));
+      const winners = stats.filter((s) => s.count === maxCount);
+
+      els.winnerSummary.textContent = winners.length > 1
+        ? `A fierce tie between ${winners.map((w) => w.name).join(" and ")} with ${maxCount} segments (${((maxCount / 20) * 100).toFixed(1)}%).`
+        : `${winners[0].name} conquered the board with ${maxCount} segments (${((maxCount / 20) * 100).toFixed(1)}% territory)!`;
 
       els.winnerChips.innerHTML = winners
-        .map(
-          (w) =>
-            `<div class="winner-chip" style="background:${w.player.color}">${w.player.name}</div>`
-        )
+        .map((w) => `<div class="winner-chip" style="background:${w.color}">${w.name} (${w.count})</div>`)
         .join("");
 
       els.winnerModal.classList.add("open");
       els.winnerModal.setAttribute("aria-hidden", "false");
+      addLog(`Match complete. Winner: ${winners.map((w) => w.name).join(", ")}.`);
+      renderAll();
     }
 
-    function renderNumberButtons() {
-      els.numberButtons.innerHTML = SEGMENTS.map((num) => {
-        return `<button class="dart-btn" type="button" data-num="${num}">${num}</button>`;
-      }).join("");
+    function drawDartboard() {
+      const svg = els.dartboard;
+      svg.innerHTML = "";
 
-      els.numberButtons.querySelectorAll("button").forEach((btn) => {
+      const outerR = 230;
+      const doubleR = 210;
+      const tripleR = 145;
+      const quadR = 90;
+      const innerR = 40;
+      const bullR = 22;
+
+      const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+      circle.setAttribute("cx", "0");
+      circle.setAttribute("cy", "0");
+      circle.setAttribute("r", outerR);
+      circle.setAttribute("fill", "#171618");
+      circle.setAttribute("stroke", "rgba(217, 179, 106, 0.2)");
+      circle.setAttribute("stroke-width", "3");
+      svg.appendChild(circle);
+
+      BOARD_ORDER.forEach((num, index) => {
+        const anglePerSeg = 360 / 20;
+        const startAngle = (index * anglePerSeg) - 90 - (anglePerSeg / 2);
+        const endAngle = startAngle + anglePerSeg;
+
+        const radS = (startAngle * Math.PI) / 180;
+        const radE = (endAngle * Math.PI) / 180;
+
+        const seg = state.board[num] || { owner: null, shield: false };
+        const color = seg.owner ? playerColor(seg.owner) : "#2d2a27";
+
+        const x1 = Math.cos(radS) * outerR;
+        const y1 = Math.sin(radS) * outerR;
+        const x2 = Math.cos(radE) * outerR;
+        const y2 = Math.sin(radE) * outerR;
+        const xi1 = Math.cos(radS) * innerR;
+        const yi1 = Math.sin(radS) * innerR;
+        const xi2 = Math.cos(radE) * innerR;
+        const yi2 = Math.sin(radE) * innerR;
+
+        const d = `M ${xi1} ${yi1} L ${x1} ${y1} A ${outerR} ${outerR} 0 0 1 ${x2} ${y2} L ${xi2} ${yi2} A ${innerR} ${innerR} 0 0 0 ${xi1} ${yi1} Z`;
+
+        const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+        path.setAttribute("d", d);
+        path.setAttribute("fill", color);
+        path.setAttribute("stroke", "rgba(17, 17, 19, 0.8)");
+        path.setAttribute("stroke-width", "2");
+        path.style.cursor = state.gameStarted ? "pointer" : "default";
+
+        path.addEventListener("click", () => {
+          if (state.gameStarted && !state.gameEnded) {
+            processHit(num, state.activeMultiplier);
+          }
+        });
+
+        svg.appendChild(path);
+
+        if (state.boardType === "quad") {
+          [quadR, tripleR, doubleR].forEach((r) => {
+            const ring = document.createElementNS("http://www.w3.org/2000/svg", "path");
+            const rx1 = Math.cos(radS) * r;
+            const ry1 = Math.sin(radS) * r;
+            const rx2 = Math.cos(radE) * r;
+            const ry2 = Math.sin(radE) * r;
+            ring.setAttribute("d", `M ${rx1} ${ry1} A ${r} ${r} 0 0 1 ${rx2} ${ry2}`);
+            ring.setAttribute("stroke", "rgba(255, 255, 255, 0.12)");
+            ring.setAttribute("stroke-width", "1");
+            ring.setAttribute("fill", "none");
+            svg.appendChild(ring);
+          });
+        } else {
+          [tripleR, doubleR].forEach((r) => {
+            const ring = document.createElementNS("http://www.w3.org/2000/svg", "path");
+            const rx1 = Math.cos(radS) * r;
+            const ry1 = Math.sin(radS) * r;
+            const rx2 = Math.cos(radE) * r;
+            const ry2 = Math.sin(radE) * r;
+            ring.setAttribute("d", `M ${rx1} ${ry1} A ${r} ${r} 0 0 1 ${rx2} ${ry2}`);
+            ring.setAttribute("stroke", "rgba(255, 255, 255, 0.12)");
+            ring.setAttribute("stroke-width", "1");
+            ring.setAttribute("fill", "none");
+            svg.appendChild(ring);
+          });
+        }
+
+        if (seg.shield) {
+          const midAngle = startAngle + (anglePerSeg / 2);
+          const radM = (midAngle * Math.PI) / 180;
+          const shieldR = (outerR + innerR) / 2;
+          const sx = Math.cos(radM) * shieldR;
+          const sy = Math.sin(radM) * shieldR;
+
+          const ring = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+          ring.setAttribute("cx", sx.toString());
+          ring.setAttribute("cy", sy.toString());
+          ring.setAttribute("r", "14");
+          ring.setAttribute("fill", "none");
+          ring.setAttribute("stroke", "var(--gold-2)");
+          ring.setAttribute("stroke-width", "3");
+          ring.setAttribute("filter", "drop-shadow(0 0 6px rgba(217, 179, 106, 0.8))");
+          svg.appendChild(ring);
+        }
+
+        const midAngle = startAngle + (anglePerSeg / 2);
+        const radM = (midAngle * Math.PI) / 180;
+        const textR = outerR - 26;
+        const tx = Math.cos(radM) * textR;
+        const ty = Math.sin(radM) * textR;
+
+        const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+        text.setAttribute("x", tx.toString());
+        text.setAttribute("y", (ty + 5).toString());
+        text.setAttribute("fill", "#f6ead6");
+        text.setAttribute("font-size", "15");
+        text.setAttribute("font-weight", "800");
+        text.setAttribute("text-anchor", "middle");
+        text.textContent = num.toString();
+        svg.appendChild(text);
+      });
+
+      const bull = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+      bull.setAttribute("cx", "0");
+      bull.setAttribute("cy", "0");
+      bull.setAttribute("r", bullR);
+      bull.setAttribute("fill", "var(--red)");
+      bull.setAttribute("stroke", "var(--gold)");
+      bull.setAttribute("stroke-width", "2");
+      bull.style.cursor = state.gameStarted ? "pointer" : "default";
+
+      bull.addEventListener("click", () => {
+        if (state.gameStarted && !state.gameEnded) {
+          processHit("bull", 1);
+        }
+      });
+      svg.appendChild(bull);
+
+      const bullText = document.createElementNS("http://www.w3.org/2000/svg", "text");
+      bullText.setAttribute("x", "0");
+      bullText.setAttribute("y", "4");
+      bullText.setAttribute("fill", "#fff");
+      bullText.setAttribute("font-size", "10");
+      bullText.setAttribute("font-weight", "800");
+      bullText.setAttribute("text-anchor", "middle");
+      bullText.textContent = "BULL";
+      svg.appendChild(bullText);
+    }
+
+    function renderControls() {
+      els.quadMode.style.display = state.boardType === "quad" ? "inline-block" : "none";
+
+      els.numberButtons.innerHTML = "";
+      SEGMENTS.forEach((num) => {
+        const btn = document.createElement("button");
+        btn.className = "dart-btn";
+        btn.type = "button";
+        btn.textContent = num;
+        btn.disabled = !state.gameStarted || state.gameEnded || state.dartsThisTurn >= DARTS_PER_TURN;
+
         btn.addEventListener("click", () => {
-          const num = Number(btn.dataset.num);
           processHit(num, state.activeMultiplier);
         });
+
+        els.numberButtons.appendChild(btn);
       });
+
+      const disabled = !state.gameStarted || state.gameEnded;
+      els.bullBtn.disabled = disabled || state.dartsThisTurn >= DARTS_PER_TURN;
+      els.missBtn.disabled = disabled || state.dartsThisTurn >= DARTS_PER_TURN;
+      els.undoBtn.disabled = !state.gameStarted || state.history.length === 0;
+      els.nextPlayerBtn.disabled = disabled;
+      els.endTurnBtn.disabled = disabled;
     }
 
     function renderStatus() {
-      const activeP = getCurrentPlayer();
-      els.quadMode.style.display = state.boardType === "quad" ? "inline-block" : "none";
+      els.roundDisplay.textContent = state.gameStarted ? `${state.currentRound}/${state.totalRounds}` : "—";
+      els.dartCountDisplay.textContent = state.dartsThrown;
+      els.throwsLeftDisplay.textContent = state.gameStarted ? `${DARTS_PER_TURN - state.dartsThisTurn}` : "—";
 
-      if (!state.gameStarted) {
-        els.roundDisplay.textContent = "—";
-        els.dartCountDisplay.textContent = "0";
-        els.throwsLeftDisplay.textContent = "—";
+      const current = getCurrentPlayer();
+      if (current) {
+        els.currentPlayerName.textContent = current.name;
+        els.currentPlayerSub.textContent = state.gameEnded ? "Campaign concluded" : `Dart ${state.dartsThisTurn + 1} of ${DARTS_PER_TURN}`;
+        els.currentTurnChip.style.background = current.color;
+      } else {
         els.currentPlayerName.textContent = "No game started";
         els.currentPlayerSub.textContent = "Enter players and rounds to begin.";
         els.currentTurnChip.style.background = "#777";
-        els.endTurnBtn.disabled = true;
-        return;
       }
-
-      els.roundDisplay.textContent = state.gameEnded ? "Done" : `${state.currentRound} / ${state.totalRounds}`;
-      els.dartCountDisplay.textContent = String(state.dartsThrown);
-      els.throwsLeftDisplay.textContent = String(DARTS_PER_TURN - state.dartsThisTurn);
-
-      if (activeP) {
-        els.currentPlayerName.textContent = activeP.name;
-        els.currentPlayerSub.textContent = `Dart ${Math.min(state.dartsThisTurn + 1, DARTS_PER_TURN)} of ${DARTS_PER_TURN}`;
-        els.currentTurnChip.style.background = activeP.color;
-      }
-      els.endTurnBtn.disabled = state.gameEnded;
     }
 
     function renderScoreboard() {
-      if (!state.players || state.players.length === 0) {
-        els.scoreList.innerHTML = `<div class="empty-state">No active empire. Start a match to populate scores.</div>`;
+      if (!state.gameStarted) {
+        els.scoreList.innerHTML = '<div class="empty-state">No players added yet.</div>';
         return;
       }
 
-      const activeP = getCurrentPlayer();
       els.scoreList.innerHTML = state.players
-        .map((p) => {
-          const ownedNums = getOwnedSegments(p.id);
-          const count = ownedNums.length;
-          const pct = Math.round((count / 20) * 100);
-          const isActive = activeP && activeP.id === p.id;
+        .map((p, index) => {
+          const active = index === state.currentPlayerIndex && !state.gameEnded;
+          const owned = getOwnedSegments(p.id);
+          const pct = ((owned.length / 20) * 100).toFixed(1);
 
-          const segTags = ownedNums
-            .map((num) => {
-              const isShielded = state.board[num].shield;
-              return `<span class="mini-seg ${isShielded ? "shielded" : ""}" style="background:${p.color}">${num}</span>`;
-            })
-            .join("");
+          const segmentsHtml = owned.length
+            ? owned.map((num) => `<span class="mini-seg ${state.board[num].shield ? "shielded" : ""}" style="background:${p.color}">${num}</span>`).join("")
+            : '<span class="empty-state">No territory held</span>';
 
           return `
-            <div class="score-item ${isActive ? "active" : ""}">
+            <div class="score-item ${active ? "active" : ""}">
               <div class="score-top">
                 <div class="player-chip" style="background:${p.color}"></div>
                 <div>
                   <div class="score-name">${p.name}</div>
-                  <div class="score-meta">${count} of 20 segments</div>
+                  <div class="score-meta">${owned.length} segment${owned.length === 1 ? "" : "s"} owned</div>
                 </div>
                 <div class="pct">${pct}%</div>
               </div>
-              <div class="owned-line">${segTags || '<span class="empty-state">No segments claimed yet</span>'}</div>
+              <div class="owned-line">${segmentsHtml}</div>
             </div>
           `;
         })
@@ -690,220 +975,56 @@
     }
 
     function renderFeed() {
-      if (!state.log || state.log.length === 0) {
-        els.feedList.innerHTML = `<div class="empty-state">Battle history will appear here.</div>`;
+      if (!state.log.length) {
+        els.feedList.innerHTML = '<div class="empty-state">No hits recorded yet.</div>';
         return;
       }
+
       els.feedList.innerHTML = state.log
         .map((item) => `<div class="feed-item">${item.text}</div>`)
         .join("");
     }
 
     function renderLegend() {
-      if (!state.players || state.players.length === 0) {
-        els.legend.innerHTML = `<div class="empty-state">No empires yet.</div>`;
+      if (!state.gameStarted) {
+        els.legend.innerHTML = "";
         return;
       }
+
       els.legend.innerHTML = state.players
-        .map(
-          (p) => `
-          <div style="display:inline-flex; align-items:center; gap:8px; font-size:0.86rem; font-weight:700;">
-            <span style="width:12px; height:12px; border-radius:50%; background:${p.color}; display:inline-block;"></span>
-            <span>${p.name}</span>
-          </div>
-        `
-        )
+        .map((p) => `<div class="pill" style="border-color:${p.color}55"><span class="player-chip" style="background:${p.color}; display:inline-block; margin-right:6px"></span>${p.name}</div>`)
         .join("");
     }
 
-    function polarToCartesian(r, deg) {
-      const rad = ((deg - 90) * Math.PI) / 180;
-      return {
-        x: r * Math.cos(rad),
-        y: r * Math.sin(rad)
-      };
-    }
-
-    function makeArcPath(rInner, rOuter, startAngle, endAngle) {
-      const p1 = polarToCartesian(rOuter, startAngle);
-      const p2 = polarToCartesian(rOuter, endAngle);
-      const p3 = polarToCartesian(rInner, endAngle);
-      const p4 = polarToCartesian(rInner, startAngle);
-
-      const largeArc = endAngle - startAngle > 180 ? 1 : 0;
-
-      return [
-        `M ${p1.x} ${p1.y}`,
-        `A ${rOuter} ${rOuter} 0 ${largeArc} 1 ${p2.x} ${p2.y}`,
-        `L ${p3.x} ${p3.y}`,
-        `A ${rInner} ${rInner} 0 ${largeArc} 0 ${p4.x} ${p4.y}`,
-        `Z`
-      ].join(" ");
-    }
-
-    function renderDartboard() {
-      const svg = els.dartboard;
-      svg.innerHTML = "";
-
-      const rOuterRing = 240;
-      const rDoubleOuter = 210;
-      const rDoubleInner = 190;
-      const rTripleOuter = 130;
-      const rTripleInner = 110;
-      const rOuterBull = 32;
-      const rInnerBull = 14;
-
-      const bgCircle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-      bgCircle.setAttribute("cx", "0");
-      bgCircle.setAttribute("cy", "0");
-      bgCircle.setAttribute("r", String(rOuterRing));
-      bgCircle.setAttribute("fill", "#171514");
-      bgCircle.setAttribute("stroke", "rgba(217,179,106,0.35)");
-      bgCircle.setAttribute("stroke-width", "4");
-      svg.appendChild(bgCircle);
-
-      const angleStep = 360 / 20;
-
-      BOARD_ORDER.forEach((num, idx) => {
-        const startAngle = idx * angleStep - angleStep / 2;
-        const endAngle = startAngle + angleStep;
-        const segData = state.board[num] || { owner: null, shield: false };
-        const ownerColor = segData.owner ? playerColor(segData.owner) : null;
-        const defaultColor = idx % 2 === 0 ? "#262320" : "#3b3631";
-        const fillColor = ownerColor || defaultColor;
-
-        const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-        path.setAttribute("d", makeArcPath(rOuterBull, rDoubleOuter, startAngle, endAngle));
-        path.setAttribute("fill", fillColor);
-        path.setAttribute("stroke", "rgba(217, 179, 106, 0.18)");
-        path.setAttribute("stroke-width", "1.5");
-        path.style.cursor = "pointer";
-        path.addEventListener("click", () => processHit(num, state.activeMultiplier));
-        svg.appendChild(path);
-
-        const doubleBand = document.createElementNS("http://www.w3.org/2000/svg", "path");
-        doubleBand.setAttribute("d", makeArcPath(rDoubleInner, rDoubleOuter, startAngle, endAngle));
-        doubleBand.setAttribute("fill", ownerColor ? ownerColor : idx % 2 === 0 ? "#8f2d21" : "#2f5d47");
-        doubleBand.setAttribute("opacity", ownerColor ? "0.95" : "0.7");
-        doubleBand.setAttribute("stroke", "rgba(255,255,255,0.12)");
-        doubleBand.style.cursor = "pointer";
-        doubleBand.addEventListener("click", () => processHit(num, 2));
-        svg.appendChild(doubleBand);
-
-        const tripleBand = document.createElementNS("http://www.w3.org/2000/svg", "path");
-        tripleBand.setAttribute("d", makeArcPath(rTripleInner, rTripleOuter, startAngle, endAngle));
-        tripleBand.setAttribute("fill", ownerColor ? ownerColor : idx % 2 === 0 ? "#8f2d21" : "#2f5d47");
-        tripleBand.setAttribute("opacity", ownerColor ? "0.95" : "0.7");
-        tripleBand.setAttribute("stroke", "rgba(255,255,255,0.12)");
-        tripleBand.style.cursor = "pointer";
-        tripleBand.addEventListener("click", () => processHit(num, 3));
-        svg.appendChild(tripleBand);
-
-        if (segData.shield) {
-          const midAngle = (startAngle + endAngle) / 2;
-          const shieldRadius = (rTripleOuter + rDoubleInner) / 2;
-          const pt = polarToCartesian(shieldRadius, midAngle);
-
-          const shieldCircle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-          shieldCircle.setAttribute("cx", String(pt.x));
-          shieldCircle.setAttribute("cy", String(pt.y));
-          shieldCircle.setAttribute("r", "11");
-          shieldCircle.setAttribute("fill", "#111113");
-          shieldCircle.setAttribute("stroke", "#f1d29a");
-          shieldCircle.setAttribute("stroke-width", "2.5");
-          svg.appendChild(shieldCircle);
-
-          const star = document.createElementNS("http://www.w3.org/2000/svg", "text");
-          star.setAttribute("x", String(pt.x));
-          star.setAttribute("y", String(pt.y + 4));
-          star.setAttribute("text-anchor", "middle");
-          star.setAttribute("fill", "#f1d29a");
-          star.setAttribute("font-size", "11");
-          star.setAttribute("font-weight", "bold");
-          star.textContent = "✦";
-          svg.appendChild(star);
-        }
-
-        const labelAngle = (startAngle + endAngle) / 2;
-        const labelPos = polarToCartesian(225, labelAngle);
-        const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
-        text.setAttribute("x", String(labelPos.x));
-        text.setAttribute("y", String(labelPos.y + 5));
-        text.setAttribute("text-anchor", "middle");
-        text.setAttribute("fill", "#f6ead6");
-        text.setAttribute("font-size", "14");
-        text.setAttribute("font-weight", "800");
-        text.setAttribute("font-family", "Inter, sans-serif");
-        text.textContent = String(num);
-        svg.appendChild(text);
-      });
-
-      const outerBull = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-      outerBull.setAttribute("cx", "0");
-      outerBull.setAttribute("cy", "0");
-      outerBull.setAttribute("r", String(rOuterBull));
-      outerBull.setAttribute("fill", "#2f5d47");
-      outerBull.setAttribute("stroke", "rgba(255,255,255,0.2)");
-      outerBull.style.cursor = "pointer";
-      outerBull.addEventListener("click", () => processHit("bull", 1));
-      svg.appendChild(outerBull);
-
-      const innerBull = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-      innerBull.setAttribute("cx", "0");
-      innerBull.setAttribute("cy", "0");
-      innerBull.setAttribute("r", String(rInnerBull));
-      innerBull.setAttribute("fill", "#8f2d21");
-      innerBull.setAttribute("stroke", "rgba(255,255,255,0.3)");
-      innerBull.style.cursor = "pointer";
-      innerBull.addEventListener("click", () => processHit("bull", 1));
-      svg.appendChild(innerBull);
-    }
-
     function renderAll() {
+      drawDartboard();
+      renderControls();
       renderStatus();
       renderScoreboard();
       renderFeed();
       renderLegend();
-      renderDartboard();
     }
 
-    function setupEventListeners() {
-      els.startBtn.addEventListener("click", startGame);
-      els.resetBtn.addEventListener("click", resetGame);
+    els.startBtn.addEventListener("click", startGame);
+    els.resetBtn.addEventListener("click", resetGame);
+    els.undoBtn.addEventListener("click", undoLast);
+    els.nextPlayerBtn.addEventListener("click", advanceTurn);
+    els.endTurnBtn.addEventListener("click", advanceTurn);
+    els.closeModalBtn.addEventListener("click", () => {
+      els.winnerModal.classList.remove("open");
+      els.winnerModal.setAttribute("aria-hidden", "true");
+    });
 
-      els.singleMode.addEventListener("click", () => setMultiplier(1));
-      els.doubleMode.addEventListener("click", () => setMultiplier(2));
-      els.tripleMode.addEventListener("click", () => setMultiplier(3));
-      els.quadMode.addEventListener("click", () => setMultiplier(4));
+    [els.singleMode, els.doubleMode, els.tripleMode, els.quadMode].forEach((btn) => {
+      if (btn) {
+        btn.addEventListener("click", () => {
+          const mult = Number(btn.dataset.multiplier);
+          setMultiplier(mult);
+        });
+      }
+    });
 
-      els.boardType.addEventListener("change", (e) => {
-        state.boardType = e.target.value;
-        if (state.boardType !== "quad" && state.activeMultiplier === 4) {
-          setMultiplier(1);
-        }
-        renderStatus();
-      });
-
-      els.bullBtn.addEventListener("click", () => processHit("bull", state.activeMultiplier));
-      els.missBtn.addEventListener("click", () => processHit("miss", state.activeMultiplier));
-      els.undoBtn.addEventListener("click", undoLast);
-      els.nextPlayerBtn.addEventListener("click", advanceTurn);
-      els.endTurnBtn.addEventListener("click", advanceTurn);
-
-      els.closeModalBtn.addEventListener("click", () => {
-        els.winnerModal.classList.remove("open");
-        els.winnerModal.setAttribute("aria-hidden", "true");
-      });
-    }
-
-    function init() {
-      renderNumberButtons();
-      setupEventListeners();
-      state.board = initBoard();
-      renderAll();
-    }
-
-    init();
+    renderAll();
   </script>
 </body>
 </html>
