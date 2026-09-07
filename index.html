@@ -103,13 +103,12 @@
     label { display: block; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--gold-2); font-weight: 700; margin-bottom: 8px; }
     input, textarea, select {
       width: 100%;
-      border: none;
       outline: none;
       background: rgba(255, 248, 239, 0.055);
       color: var(--ink);
       border: 1px solid rgba(217, 179, 106, 0.18);
       border-radius: 16px;
-      padding: 14px 14px;
+      padding: 14px;
       font: inherit;
       transition: 0.2s ease;
     }
@@ -173,119 +172,37 @@
     .board-head { display: flex; justify-content: space-between; align-items: end; gap: 12px; padding: 4px 6px 0; }
     .board-head p { margin: 8px 0 0; color: var(--muted); font-size: 0.92rem; max-width: 44ch; line-height: 1.5; }
     .board-wrap { display: grid; place-items: center; padding: 8px 8px 4px; }
-    .board-box {
-      width: min(100%, 660px);
-      aspect-ratio: 1;
-      position: relative;
-      display: grid;
-      place-items: center;
-      filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.45));
-    }
+    .board-box { width: min(100%, 660px); aspect-ratio: 1; position: relative; display: grid; place-items: center; filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.45)); }
     svg { display: block; width: 100%; height: 100%; }
     .legend { display: flex; flex-wrap: wrap; gap: 10px; padding: 4px 6px 0; }
     .controls { padding: 18px; display: grid; gap: 14px; }
     .controls-header { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
     .mode-pills { display: flex; gap: 8px; flex-wrap: wrap; }
-    .pill {
-      padding: 10px 14px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(217, 179, 106, 0.14);
-      color: var(--stone);
-      font-weight: 800;
-      letter-spacing: 0.04em;
-    }
-    .pill.active {
-      background: linear-gradient(180deg, rgba(217, 179, 106, 0.22), rgba(217, 179, 106, 0.12));
-      color: var(--gold-2);
-      box-shadow: 0 10px 24px rgba(217, 179, 106, 0.12);
-    }
+    .pill { padding: 10px 14px; border-radius: 999px; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(217, 179, 106, 0.14); color: var(--stone); font-weight: 800; letter-spacing: 0.04em; }
+    .pill.active { background: linear-gradient(180deg, rgba(217, 179, 106, 0.22), rgba(217, 179, 106, 0.12)); color: var(--gold-2); box-shadow: 0 10px 24px rgba(217, 179, 106, 0.12); }
     .number-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; }
-    .dart-btn {
-      min-height: 58px;
-      border-radius: 18px;
-      font-weight: 800;
-      font-size: 1rem;
-      position: relative;
-      overflow: hidden;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.018));
-      border: 1px solid rgba(217, 179, 106, 0.14);
-      color: var(--ink);
-    }
+    .dart-btn { min-height: 58px; border-radius: 18px; font-weight: 800; font-size: 1rem; position: relative; overflow: hidden; background: linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.018)); border: 1px solid rgba(217, 179, 106, 0.14); color: var(--ink); }
     .dart-btn.special { background: linear-gradient(180deg, rgba(143, 45, 33, 0.28), rgba(143, 45, 33, 0.12)); border-color: rgba(186, 76, 59, 0.28); }
     .dart-btn.utility { background: linear-gradient(180deg, rgba(47, 93, 71, 0.25), rgba(47, 93, 71, 0.1)); border-color: rgba(98, 170, 133, 0.18); }
     .action-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
     .scoreboard { padding: 18px; display: grid; gap: 14px; }
     .score-list { display: grid; gap: 10px; }
-    .score-item {
-      border-radius: 20px;
-      border: 1px solid rgba(217, 179, 106, 0.14);
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
-      padding: 14px;
-      display: grid;
-      gap: 12px;
-      transition: transform 0.2s ease, border-color 0.2s ease;
-    }
+    .score-item { border-radius: 20px; border: 1px solid rgba(217, 179, 106, 0.14); background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01)); padding: 14px; display: grid; gap: 12px; transition: transform 0.2s ease, border-color 0.2s ease; }
     .score-item.active { border-color: rgba(241, 210, 154, 0.45); transform: translateY(-2px); box-shadow: 0 14px 28px rgba(0, 0, 0, 0.18); }
     .score-top { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 12px; }
     .score-name { font-weight: 800; font-size: 1rem; }
     .score-meta { color: var(--muted); font-size: 0.84rem; line-height: 1.35; }
     .pct { font-size: 1.25rem; font-weight: 900; color: var(--gold-2); text-align: right; }
     .owned-line { display: flex; flex-wrap: wrap; gap: 8px; }
-    .mini-seg {
-      min-width: 34px;
-      height: 34px;
-      border-radius: 999px;
-      display: inline-grid;
-      place-items: center;
-      padding: 0 10px;
-      font-size: 0.85rem;
-      font-weight: 800;
-      color: #160f09;
-      position: relative;
-      border: 1px solid rgba(255, 255, 255, 0.22);
-    }
-    .mini-seg.shielded::after {
-      content: "✦";
-      position: absolute;
-      top: -6px;
-      right: -2px;
-      font-size: 0.76rem;
-      color: var(--gold-2);
-      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
-    }
+    .mini-seg { min-width: 34px; height: 34px; border-radius: 999px; display: inline-grid; place-items: center; padding: 0 10px; font-size: 0.85rem; font-weight: 800; color: #160f09; position: relative; border: 1px solid rgba(255, 255, 255, 0.22); }
+    .mini-seg.shielded::after { content: "✦"; position: absolute; top: -6px; right: -2px; font-size: 0.76rem; color: var(--gold-2); text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5); }
     .empty-state { color: var(--ash); font-size: 0.92rem; padding: 6px 0 2px; }
     .feed { padding: 18px; display: grid; gap: 12px; }
     .feed-list { max-height: 310px; overflow: auto; display: grid; gap: 10px; padding-right: 4px; }
-    .feed-item {
-      padding: 12px 13px;
-      border-radius: 16px;
-      background: rgba(255, 255, 255, 0.035);
-      border: 1px solid rgba(217, 179, 106, 0.12);
-      color: var(--stone);
-      line-height: 1.45;
-      font-size: 0.92rem;
-    }
-    .modal {
-      position: fixed;
-      inset: 0;
-      display: none;
-      place-items: center;
-      padding: 18px;
-      background: rgba(8, 8, 10, 0.62);
-      backdrop-filter: blur(10px);
-      z-index: 30;
-    }
+    .feed-item { padding: 12px 13px; border-radius: 16px; background: rgba(255, 255, 255, 0.035); border: 1px solid rgba(217, 179, 106, 0.12); color: var(--stone); line-height: 1.45; font-size: 0.92rem; }
+    .modal { position: fixed; inset: 0; display: none; place-items: center; padding: 18px; background: rgba(8, 8, 10, 0.62); backdrop-filter: blur(10px); z-index: 30; }
     .modal.open { display: grid; }
-    .modal-card {
-      width: min(680px, 100%);
-      border-radius: 28px;
-      border: 1px solid rgba(217, 179, 106, 0.18);
-      background: radial-gradient(circle at top, rgba(217, 179, 106, 0.12), transparent 30%), linear-gradient(180deg, #1c1917 0%, #141214 100%);
-      box-shadow: var(--shadow);
-      padding: 26px;
-      text-align: center;
-    }
+    .modal-card { width: min(680px, 100%); border-radius: 28px; border: 1px solid rgba(217, 179, 106, 0.18); background: radial-gradient(circle at top, rgba(217, 179, 106, 0.12), transparent 30%), linear-gradient(180deg, #1c1917 0%, #141214 100%); box-shadow: var(--shadow); padding: 26px; text-align: center; }
     .modal-card h2 { font-size: clamp(2rem, 4vw, 3.4rem); color: var(--gold-2); }
     .winners { margin-top: 18px; display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; }
     .winner-chip { padding: 10px 14px; border-radius: 999px; font-weight: 800; color: #180f08; border: 1px solid rgba(255, 255, 255, 0.24); }
@@ -293,9 +210,7 @@
     .section-title { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
     .section-title h3 { font-size: 1.28rem; color: var(--stone); }
     .ghost { color: var(--ash); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.14em; font-weight: 700; }
-    @media (max-width: 1180px) {
-      .app { grid-template-columns: 1fr; }
-    }
+    @media (max-width: 1180px) { .app { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
@@ -306,7 +221,6 @@
         <h1>Roman Empire</h1>
         <p class="sub">Conquer the board in a single dart. Claim free segments, fortify your own with shields, and raid enemy territory with doubles, triples, and quads.</p>
       </div>
-
       <section class="panel setup" aria-labelledby="setupTitle">
         <div class="section-title">
           <h3 id="setupTitle">Game Setup</h3>
@@ -337,7 +251,6 @@
           </div>
         </div>
       </section>
-
       <section class="panel status" aria-labelledby="statusTitle">
         <div class="section-title">
           <h3 id="statusTitle">Imperial Status</h3>
@@ -367,7 +280,6 @@
         </div>
       </section>
     </section>
-
     <section class="center">
       <section class="panel board-shell" aria-labelledby="boardTitle">
         <div class="board-head">
@@ -384,7 +296,6 @@
         </div>
         <div class="legend" id="legend"></div>
       </section>
-
       <section class="panel controls" aria-labelledby="controlsTitle">
         <div class="controls-header">
           <div>
@@ -407,7 +318,6 @@
         </div>
       </section>
     </section>
-
     <section class="right">
       <section class="panel scoreboard" aria-labelledby="scoreTitle">
         <div class="section-title">
@@ -416,7 +326,6 @@
         </div>
         <div class="score-list" id="scoreList"></div>
       </section>
-
       <section class="panel feed" aria-labelledby="feedTitle">
         <div class="section-title">
           <h3 id="feedTitle">Battle Log</h3>
@@ -442,10 +351,7 @@
   <script>
     const SEGMENTS = Array.from({ length: 20 }, (_, i) => i + 1);
     const BOARD_ORDER = [20, 1, 18, 4, 13, 6, 10, 15, 2, 17, 3, 19, 7, 16, 8, 11, 14, 9, 12, 5];
-    const PLAYER_COLORS = [
-      "#27D7E9", "#BA4C3B", "#4F8CFF", "#4FB477", "#C86BFA",
-      "#F28F3B", "#24B7B0", "#E75A8A", "#9BD14D", "#8C7BFF"
-    ];
+    const PLAYER_COLORS = ["#27D7E9", "#BA4C3B", "#4F8CFF", "#4FB477", "#C86BFA", "#F28F3B", "#24B7B0", "#E75A8A", "#9BD14D", "#8C7BFF"];
     const DARTS_PER_TURN = 3;
 
     const state = {
@@ -496,15 +402,11 @@
       quadMode: document.getElementById("quadMode")
     };
 
-    function deepClone(obj) {
-      return JSON.parse(JSON.stringify(obj));
-    }
+    function deepClone(obj) { return JSON.parse(JSON.stringify(obj)); }
 
     function initBoard() {
       const board = {};
-      SEGMENTS.forEach((n) => {
-        board[n] = { owner: null, shield: false };
-      });
+      SEGMENTS.forEach((n) => { board[n] = { owner: null, shield: false }; });
       return board;
     }
 
@@ -535,9 +437,7 @@
       renderAll();
     }
 
-    function getCurrentPlayer() {
-      return state.players[state.currentPlayerIndex] || null;
-    }
+    function getCurrentPlayer() { return state.players[state.currentPlayerIndex] || null; }
 
     function playerColor(playerId) {
       const p = state.players.find((x) => x.id === playerId);
@@ -558,7 +458,6 @@
     function startGame() {
       const names = sanitizeNames(els.playerNames.value);
       let rounds = parseInt(els.roundCount.value, 10);
-
       if (names.length < 2) {
         alert("Please enter at least 2 player names.");
         return;
@@ -572,7 +471,6 @@
         name,
         color: PLAYER_COLORS[i % PLAYER_COLORS.length]
       }));
-
       state.boardType = els.boardType.value;
       state.totalRounds = rounds;
       state.currentPlayerIndex = 0;
@@ -630,14 +528,11 @@
     }
 
     function shieldAllOwned(playerId) {
-      getOwnedSegments(playerId).forEach((n) => {
-        state.board[n].shield = true;
-      });
+      getOwnedSegments(playerId).forEach((n) => { state.board[n].shield = true; });
     }
 
     function processHit(target, multiplier = 1) {
       if (!state.gameStarted || state.gameEnded) return;
-
       if (state.dartsThisTurn >= DARTS_PER_TURN) {
         alert(`You have already thrown ${DARTS_PER_TURN} darts this turn. Please advance to the next player.`);
         return;
@@ -658,32 +553,23 @@
         const seg = state.board[num];
 
         if (seg.shield) {
-          // Shielded segment processing rules
-          const defenderName = seg.owner
-            ? (state.players.find((p) => p.id === seg.owner)?.name || "Enemy")
-            : "Unknown";
-
+          const defenderName = seg.owner ? (state.players.find((p) => p.id === seg.owner)?.name || "Enemy") : "Unknown";
           if (multiplier === 4) {
-            // Quad: Unshield, unclaimed, then claim and shield for thrower
             seg.owner = playerId;
             seg.shield = true;
             message = `${player.name} hit Quad ${num}! Unshielded, freed, claimed, and shielded ${defenderName}'s segment!`;
           } else if (multiplier === 3) {
-            // Triple: Unshield, unclaimed, then claim for thrower
             seg.owner = playerId;
             seg.shield = false;
             message = `${player.name} hit Triple ${num}! Unshielded, freed, and claimed ${defenderName}'s segment!`;
           } else if (multiplier === 2) {
-            // Double: Unshield and unclaimed (neutralized)
             seg.owner = null;
             seg.shield = false;
             message = `${player.name} hit Double ${num}! Unshielded and freed ${defenderName}'s segment!`;
           } else {
-            // Single: Repelled
             message = `${player.name} hit Single ${num} against ${defenderName}'s shielded segment. Repelled!`;
           }
         } else if (seg.owner === null) {
-          // Unclaimed & unshielded target
           seg.owner = playerId;
           if (multiplier >= 2) {
             seg.shield = true;
@@ -693,35 +579,33 @@
             message = `${player.name} claimed ${formatHit(multiplier, num)} for the empire.`;
           }
         } else if (seg.owner === playerId) {
-          // Unshielded target owned by active player
           seg.shield = true;
           message = `${player.name} reinforced ${formatHit(multiplier, num)} and activated its shield.`;
         } else {
-          // Unshielded target owned by opponent: free segment
           const defenderName = state.players.find((p) => p.id === seg.owner)?.name || "Enemy";
           seg.owner = null;
           seg.shield = false;
-          message = `${player.name} hit ${formatHit(multiplier, num)} and freed ${defenderName}'s segment!`;
+          message = `${player.name} struck ${defenderName}'s unshielded ${formatHit(multiplier, num)} and freed it!`;
         }
       }
 
-      state.dartsThisTurn += 1;
-      state.dartsThrown += 1;
+      state.dartsThisTurn++;
+      state.dartsThrown++;
       addLog(message);
-      setMultiplier(1);
       renderAll();
     }
 
     function advanceTurn() {
       if (!state.gameStarted || state.gameEnded) return;
-
       pushHistory();
+
       state.dartsThisTurn = 0;
-      state.currentPlayerIndex += 1;
+      state.activeMultiplier = 1;
+      state.currentPlayerIndex++;
 
       if (state.currentPlayerIndex >= state.players.length) {
         state.currentPlayerIndex = 0;
-        state.currentRound += 1;
+        state.currentRound++;
       }
 
       if (state.currentRound > state.totalRounds) {
@@ -729,279 +613,218 @@
         return;
       }
 
-      addLog(`It is now ${getCurrentPlayer().name}'s turn (Round ${state.currentRound}/${state.totalRounds}).`);
+      addLog(`Turn advanced to ${getCurrentPlayer().name}.`);
       renderAll();
     }
 
     function endGame() {
       state.gameEnded = true;
-      const stats = state.players.map((p) => {
+      const scores = state.players.map((p) => {
         const owned = getOwnedSegments(p.id);
-        return { ...p, owned, count: owned.length, pct: ((owned.length / 20) * 100).toFixed(1) };
+        return { player: p, count: owned.length, pct: ((owned.length / 20) * 100).toFixed(1) };
       });
 
-      const maxCount = Math.max(...stats.map((s) => s.count));
-      const winners = stats.filter((s) => s.count === maxCount);
+      scores.sort((a, b) => b.count - a.count);
+      const topScore = scores[0].count;
+      const winners = scores.filter((s) => s.count === topScore);
 
-      els.winnerSummary.textContent = winners.length > 1
-        ? `A fierce tie between ${winners.map((w) => w.name).join(" and ")} with ${maxCount} segments (${((maxCount / 20) * 100).toFixed(1)}%).`
-        : `${winners[0].name} conquered the board with ${maxCount} segments (${((maxCount / 20) * 100).toFixed(1)}% territory)!`;
+      if (winners.length > 1) {
+        els.winnerSummary.textContent = `A tied empire victory! Multiple rulers claimed ${topScore} segment(s) (${((topScore / 20) * 100).toFixed(1)}%).`;
+      } else {
+        els.winnerSummary.textContent = `${winners[0].player.name} reigns supreme with ${topScore} segment(s) claimed (${winners[0].pct}% of the board).`;
+      }
 
-      els.winnerChips.innerHTML = winners
-        .map((w) => `<div class="winner-chip" style="background:${w.color}">${w.name} (${w.count})</div>`)
-        .join("");
-
+      els.winnerChips.innerHTML = winners.map((w) => `<div class="winner-chip" style="background:${w.player.color}">${w.player.name}</div>`).join("");
       els.winnerModal.classList.add("open");
       els.winnerModal.setAttribute("aria-hidden", "false");
-      addLog(`Match complete. Winner: ${winners.map((w) => w.name).join(", ")}.`);
+      addLog("Campaign ended. Victory declared!");
       renderAll();
     }
 
-    function drawDartboard() {
-      const svg = els.dartboard;
-      svg.innerHTML = "";
+    function renderAll() {
+      const activePlayer = getCurrentPlayer();
 
-      const outerR = 230;
-      const doubleR = 210;
-      const tripleR = 145;
-      const quadR = 90;
-      const innerR = 40;
-      const bullR = 22;
-
-      const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-      circle.setAttribute("cx", "0");
-      circle.setAttribute("cy", "0");
-      circle.setAttribute("r", outerR);
-      circle.setAttribute("fill", "#171618");
-      circle.setAttribute("stroke", "rgba(217, 179, 106, 0.2)");
-      circle.setAttribute("stroke-width", "3");
-      svg.appendChild(circle);
-
-      BOARD_ORDER.forEach((num, index) => {
-        const anglePerSeg = 360 / 20;
-        const startAngle = (index * anglePerSeg) - 90 - (anglePerSeg / 2);
-        const endAngle = startAngle + anglePerSeg;
-
-        const radS = (startAngle * Math.PI) / 180;
-        const radE = (endAngle * Math.PI) / 180;
-
-        const seg = state.board[num] || { owner: null, shield: false };
-        const color = seg.owner ? playerColor(seg.owner) : "#2d2a27";
-
-        const x1 = Math.cos(radS) * outerR;
-        const y1 = Math.sin(radS) * outerR;
-        const x2 = Math.cos(radE) * outerR;
-        const y2 = Math.sin(radE) * outerR;
-        const xi1 = Math.cos(radS) * innerR;
-        const yi1 = Math.sin(radS) * innerR;
-        const xi2 = Math.cos(radE) * innerR;
-        const yi2 = Math.sin(radE) * innerR;
-
-        const d = `M ${xi1} ${yi1} L ${x1} ${y1} A ${outerR} ${outerR} 0 0 1 ${x2} ${y2} L ${xi2} ${yi2} A ${innerR} ${innerR} 0 0 0 ${xi1} ${yi1} Z`;
-
-        const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-        path.setAttribute("d", d);
-        path.setAttribute("fill", color);
-        path.setAttribute("stroke", "rgba(17, 17, 19, 0.8)");
-        path.setAttribute("stroke-width", "2");
-        path.style.cursor = state.gameStarted ? "pointer" : "default";
-
-        path.addEventListener("click", () => {
-          if (state.gameStarted && !state.gameEnded) {
-            processHit(num, state.activeMultiplier);
-          }
-        });
-
-        svg.appendChild(path);
-
-        const ringRadiusList = state.boardType === "quad" ? [quadR, tripleR, doubleR] : [tripleR, doubleR];
-        ringRadiusList.forEach((r) => {
-          const ring = document.createElementNS("http://www.w3.org/2000/svg", "path");
-          const rx1 = Math.cos(radS) * r;
-          const ry1 = Math.sin(radS) * r;
-          const rx2 = Math.cos(radE) * r;
-          const ry2 = Math.sin(radE) * r;
-          ring.setAttribute("d", `M ${rx1} ${ry1} A ${r} ${r} 0 0 1 ${rx2} ${ry2}`);
-          ring.setAttribute("stroke", "rgba(255, 255, 255, 0.12)");
-          ring.setAttribute("stroke-width", "1");
-          ring.setAttribute("fill", "none");
-          svg.appendChild(ring);
-        });
-
-        if (seg.shield) {
-          const midAngle = startAngle + (anglePerSeg / 2);
-          const radM = (midAngle * Math.PI) / 180;
-          const shieldR = (outerR + innerR) / 2;
-          const sx = Math.cos(radM) * shieldR;
-          const sy = Math.sin(radM) * shieldR;
-
-          const ring = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-          ring.setAttribute("cx", sx.toString());
-          ring.setAttribute("cy", sy.toString());
-          ring.setAttribute("r", "14");
-          ring.setAttribute("fill", "none");
-          ring.setAttribute("stroke", "var(--gold-2)");
-          ring.setAttribute("stroke-width", "3");
-          ring.setAttribute("filter", "drop-shadow(0 0 6px rgba(217, 179, 106, 0.8))");
-          svg.appendChild(ring);
+      if (els.quadMode) {
+        els.quadMode.style.display = state.boardType === "quad" ? "inline-block" : "none";
+        if (state.boardType !== "quad" && state.activeMultiplier === 4) {
+          state.activeMultiplier = 1;
         }
+      }
 
-        const midAngle = startAngle + (anglePerSeg / 2);
-        const radM = (midAngle * Math.PI) / 180;
-        const textR = outerR - 26;
-        const tx = Math.cos(radM) * textR;
-        const ty = Math.sin(radM) * textR;
+      setMultiplier(state.activeMultiplier);
 
-        const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
-        text.setAttribute("x", tx.toString());
-        text.setAttribute("y", (ty + 5).toString());
-        text.setAttribute("fill", "#f6ead6");
-        text.setAttribute("font-size", "15");
-        text.setAttribute("font-weight", "800");
-        text.setAttribute("text-anchor", "middle");
-        text.textContent = num.toString();
-        svg.appendChild(text);
-      });
-
-      const bull = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-      bull.setAttribute("cx", "0");
-      bull.setAttribute("cy", "0");
-      bull.setAttribute("r", bullR);
-      bull.setAttribute("fill", "var(--red)");
-      bull.setAttribute("stroke", "var(--gold)");
-      bull.setAttribute("stroke-width", "2");
-      bull.style.cursor = state.gameStarted ? "pointer" : "default";
-
-      bull.addEventListener("click", () => {
-        if (state.gameStarted && !state.gameEnded) {
-          processHit("bull", 1);
-        }
-      });
-      svg.appendChild(bull);
-
-      const bullText = document.createElementNS("http://www.w3.org/2000/svg", "text");
-      bullText.setAttribute("x", "0");
-      bullText.setAttribute("y", "4");
-      bullText.setAttribute("fill", "#fff");
-      bullText.setAttribute("font-size", "10");
-      bullText.setAttribute("font-weight", "800");
-      bullText.setAttribute("text-anchor", "middle");
-      bullText.textContent = "BULL";
-      svg.appendChild(bullText);
-    }
-
-    function renderControls() {
-      els.quadMode.style.display = state.boardType === "quad" ? "inline-block" : "none";
-
-      els.numberButtons.innerHTML = "";
-      SEGMENTS.forEach((num) => {
-        const btn = document.createElement("button");
-        btn.className = "dart-btn";
-        btn.type = "button";
-        btn.textContent = num;
-        btn.disabled = !state.gameStarted || state.gameEnded || state.dartsThisTurn >= DARTS_PER_TURN;
-
-        btn.addEventListener("click", () => {
-          processHit(num, state.activeMultiplier);
-        });
-
-        els.numberButtons.appendChild(btn);
-      });
-
-      const disabled = !state.gameStarted || state.gameEnded;
-      els.bullBtn.disabled = disabled || state.dartsThisTurn >= DARTS_PER_TURN;
-      els.missBtn.disabled = disabled || state.dartsThisTurn >= DARTS_PER_TURN;
-      els.undoBtn.disabled = !state.gameStarted || state.history.length === 0;
-      els.nextPlayerBtn.disabled = disabled;
-      els.endTurnBtn.disabled = disabled;
-    }
-
-    function renderStatus() {
-      els.roundDisplay.textContent = state.gameStarted ? `${state.currentRound}/${state.totalRounds}` : "—";
+      els.roundDisplay.textContent = state.gameStarted ? `${state.currentRound} / ${state.totalRounds}` : "—";
       els.dartCountDisplay.textContent = state.dartsThrown;
       els.throwsLeftDisplay.textContent = state.gameStarted ? `${DARTS_PER_TURN - state.dartsThisTurn}` : "—";
 
-      const current = getCurrentPlayer();
-      if (current) {
-        els.currentPlayerName.textContent = current.name;
-        els.currentPlayerSub.textContent = state.gameEnded ? "Campaign concluded" : `Dart ${state.dartsThisTurn + 1} of ${DARTS_PER_TURN}`;
-        els.currentTurnChip.style.background = current.color;
+      if (activePlayer && state.gameStarted && !state.gameEnded) {
+        els.currentPlayerName.textContent = activePlayer.name;
+        els.currentPlayerSub.textContent = `Darts thrown this turn: ${state.dartsThisTurn} of ${DARTS_PER_TURN}`;
+        els.currentTurnChip.style.background = activePlayer.color;
+      } else if (state.gameEnded) {
+        els.currentPlayerName.textContent = "Campaign Complete";
+        els.currentPlayerSub.textContent = "Final territory controlled. Check the scoreboard or winner modal.";
+        els.currentTurnChip.style.background = "#777";
       } else {
         els.currentPlayerName.textContent = "No game started";
         els.currentPlayerSub.textContent = "Enter players and rounds to begin.";
         els.currentTurnChip.style.background = "#777";
       }
+
+      els.endTurnBtn.disabled = !state.gameStarted || state.gameEnded;
+      els.nextPlayerBtn.disabled = !state.gameStarted || state.gameEnded;
+
+      renderNumberButtons();
+      renderScoreboard();
+      renderFeed();
+      renderDartboard();
+    }
+
+    function renderNumberButtons() {
+      els.numberButtons.innerHTML = "";
+      SEGMENTS.forEach((num) => {
+        const btn = document.createElement("button");
+        btn.className = "dart-btn";
+        btn.textContent = num;
+        btn.type = "button";
+        btn.disabled = !state.gameStarted || state.gameEnded;
+
+        const seg = state.board[num];
+        if (seg && seg.owner) {
+          btn.style.borderColor = playerColor(seg.owner);
+        }
+
+        btn.addEventListener("click", () => processHit(num, state.activeMultiplier));
+        els.numberButtons.appendChild(btn);
+      });
     }
 
     function renderScoreboard() {
-      if (!state.gameStarted) {
-        els.scoreList.innerHTML = '<div class="empty-state">No players added yet.</div>';
+      els.scoreList.innerHTML = "";
+      if (!state.players.length) {
+        els.scoreList.innerHTML = `<div class="empty-state">No players configured yet.</div>`;
         return;
       }
 
-      els.scoreList.innerHTML = state.players
-        .map((p, index) => {
-          const active = index === state.currentPlayerIndex && !state.gameEnded;
-          const owned = getOwnedSegments(p.id);
-          const pct = ((owned.length / 20) * 100).toFixed(1);
+      const activePlayer = getCurrentPlayer();
+      state.players.forEach((p) => {
+        const owned = getOwnedSegments(p.id);
+        const pct = ((owned.length / 20) * 100).toFixed(0);
 
-          const segmentsHtml = owned.length
-            ? owned.map((num) => `<span class="mini-seg ${state.board[num].shield ? "shielded" : ""}" style="background:${p.color}">${num}</span>`).join("")
-            : '<span class="empty-state">No territory held</span>';
+        const card = document.createElement("div");
+        card.className = `score-item ${activePlayer && activePlayer.id === p.id ? "active" : ""}`;
 
-          return `
-            <div class="score-item ${active ? "active" : ""}">
-              <div class="score-top">
-                <div class="player-chip" style="background:${p.color}"></div>
-                <div>
-                  <div class="score-name">${p.name}</div>
-                  <div class="score-meta">${owned.length} segment${owned.length === 1 ? "" : "s"} owned</div>
-                </div>
-                <div class="pct">${pct}%</div>
-              </div>
-              <div class="owned-line">${segmentsHtml}</div>
+        const chipsHtml = owned.length
+          ? owned.map((num) => {
+              const seg = state.board[num];
+              return `<span class="mini-seg ${seg.shield ? "shielded" : ""}" style="background:${p.color}">${num}</span>`;
+            }).join("")
+          : `<span class="empty-state">No segments claimed yet</span>`;
+
+        card.innerHTML = `
+          <div class="score-top">
+            <div class="player-chip" style="background:${p.color}"></div>
+            <div>
+              <div class="score-name">${p.name}</div>
+              <div class="score-meta">${owned.length} segment(s) claimed</div>
             </div>
-          `;
-        })
-        .join("");
+            <div class="pct">${pct}%</div>
+          </div>
+          <div class="owned-line">${chipsHtml}</div>
+        `;
+        els.scoreList.appendChild(card);
+      });
     }
 
     function renderFeed() {
+      els.feedList.innerHTML = "";
       if (!state.log.length) {
-        els.feedList.innerHTML = '<div class="empty-state">No hits recorded yet.</div>';
+        els.feedList.innerHTML = `<div class="empty-state">No actions logged yet.</div>`;
         return;
       }
-
-      els.feedList.innerHTML = state.log
-        .map((item) => `<div class="feed-item">${item.text}</div>`)
-        .join("");
+      state.log.forEach((item) => {
+        const div = document.createElement("div");
+        div.className = "feed-item";
+        div.textContent = item.text;
+        els.feedList.appendChild(div);
+      });
     }
 
-    function renderLegend() {
-      if (!state.gameStarted) {
-        els.legend.innerHTML = "";
-        return;
-      }
+    function renderDartboard() {
+      const svg = els.dartboard;
+      svg.innerHTML = "";
 
-      els.legend.innerHTML = state.players
-        .map((p) => `<div class="pill" style="border-color:${p.color}55"><span class="player-chip" style="background:${p.color}; display:inline-block; margin-right:6px"></span>${p.name}</div>`)
-        .join("");
+      const bgRing = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+      bgRing.setAttribute("r", "240");
+      bgRing.setAttribute("fill", "#141214");
+      bgRing.setAttribute("stroke", "rgba(217,179,106,0.2)");
+      bgRing.setAttribute("stroke-width", "4");
+      svg.appendChild(bgRing);
+
+      const count = BOARD_ORDER.length;
+      const angleStep = (2 * Math.PI) / count;
+      const startOffset = -Math.PI / 2 - angleStep / 2;
+
+      BOARD_ORDER.forEach((num, index) => {
+        const a1 = startOffset + index * angleStep;
+        const a2 = a1 + angleStep;
+
+        const seg = state.board[num] || { owner: null, shield: false };
+        const color = seg.owner ? playerColor(seg.owner) : (index % 2 === 0 ? "#232023" : "#1a181a");
+
+        const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+        const rInner = 35;
+        const rOuter = 210;
+
+        const x1 = Math.cos(a1) * rOuter, y1 = Math.sin(a1) * rOuter;
+        const x2 = Math.cos(a2) * rOuter, y2 = Math.sin(a2) * rOuter;
+        const x3 = Math.cos(a2) * rInner, y3 = Math.sin(a2) * rInner;
+        const x4 = Math.cos(a1) * rInner, y4 = Math.sin(a1) * rInner;
+
+        const d = `M ${x1} ${y1} A ${rOuter} ${rOuter} 0 0 1 ${x2} ${y2} L ${x3} ${y3} A ${rInner} ${rInner} 0 0 0 ${x4} ${y4} Z`;
+        path.setAttribute("d", d);
+        path.setAttribute("fill", color);
+        path.setAttribute("stroke", seg.shield ? "#f1d29a" : "rgba(217,179,106,0.22)");
+        path.setAttribute("stroke-width", seg.shield ? "5" : "1.5");
+        path.style.cursor = state.gameStarted && !state.gameEnded ? "pointer" : "default";
+
+        path.addEventListener("click", () => processHit(num, state.activeMultiplier));
+        svg.appendChild(path);
+
+        const midAngle = a1 + angleStep / 2;
+        const tx = Math.cos(midAngle) * 228;
+        const ty = Math.sin(midAngle) * 228;
+
+        const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+        text.setAttribute("x", tx.toString());
+        text.setAttribute("y", ty.toString());
+        text.setAttribute("fill", "#d7c8b0");
+        text.setAttribute("font-size", "15");
+        text.setAttribute("font-weight", "800");
+        text.setAttribute("text-anchor", "middle");
+        text.setAttribute("dominant-baseline", "central");
+        text.textContent = num.toString();
+        svg.appendChild(text);
+      });
+
+      const bull = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+      bull.setAttribute("r", "28");
+      bull.setAttribute("fill", "#8f2d21");
+      bull.setAttribute("stroke", "#f1d29a");
+      bull.setAttribute("stroke-width", "2");
+      bull.style.cursor = state.gameStarted && !state.gameEnded ? "pointer" : "default";
+      bull.addEventListener("click", () => processHit("bull", state.activeMultiplier));
+      svg.appendChild(bull);
     }
 
-    function renderAll() {
-      drawDartboard();
-      renderControls();
-      renderStatus();
-      renderScoreboard();
-      renderFeed();
-      renderLegend();
-    }
-
+    // Event Bindings
     els.startBtn.addEventListener("click", startGame);
     els.resetBtn.addEventListener("click", resetGame);
     els.undoBtn.addEventListener("click", undoLast);
     els.nextPlayerBtn.addEventListener("click", advanceTurn);
     els.endTurnBtn.addEventListener("click", advanceTurn);
+    els.bullBtn.addEventListener("click", () => processHit("bull", state.activeMultiplier));
+    els.missBtn.addEventListener("click", () => processHit("miss", state.activeMultiplier));
     els.closeModalBtn.addEventListener("click", () => {
       els.winnerModal.classList.remove("open");
       els.winnerModal.setAttribute("aria-hidden", "true");
@@ -1010,12 +833,13 @@
     [els.singleMode, els.doubleMode, els.tripleMode, els.quadMode].forEach((btn) => {
       if (btn) {
         btn.addEventListener("click", () => {
-          const mult = Number(btn.dataset.multiplier);
-          setMultiplier(mult);
+          setMultiplier(Number(btn.dataset.multiplier));
         });
       }
     });
 
+    // Default Initialization
+    els.playerNames.value = "Cassius\nLivia\nMaximus";
     renderAll();
   </script>
 </body>
