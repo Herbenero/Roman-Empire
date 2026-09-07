@@ -636,7 +636,7 @@
 
       els.winnerChips.innerHTML = winners.map((w) => `<div class="winner-chip" style="background:${w.player.color}">${w.player.name}</div>`).join("");
       els.winnerModal.classList.add("open");
-      els.winnerModal.setAttribute("aria-hidden", "false");
+      els.winnerModal.setAttribute("aria-hidden", "true");
       addLog("Campaign ended. Victory declared!");
       renderAll();
     }
@@ -799,11 +799,11 @@
         text.setAttribute("x", tx.toString());
         text.setAttribute("y", ty.toString());
         text.setAttribute("fill", "#d7c8b0");
-        text.setAttribute("font-size", "15");
+        text.setAttribute("font-size", seg.shield ? "12" : "15");
         text.setAttribute("font-weight", "800");
         text.setAttribute("text-anchor", "middle");
         text.setAttribute("dominant-baseline", "central");
-        text.textContent = num.toString();
+        text.textContent = seg.shield ? `${num}🛡️` : num.toString();
         svg.appendChild(text);
       });
 
