@@ -63,40 +63,32 @@
     .brand { padding: 22px 22px 18px; position: relative; isolation: isolate; }
     .brand::after {
       content: "SPQR"; position: absolute; right: 18px; top: 16px;
-      font-family: "Cinzel", serif;
-      font-size: clamp(2rem, 5vw, 3.3rem);
-      line-height: 1; letter-spacing: 0.12em;
-      color: rgba(217, 179, 106, 0.09);
-      z-index: -1;
+      font-family: "Cinzel", serif; font-size: clamp(2rem, 5vw, 3.3rem); line-height: 1; letter-spacing: 0.12em;
+      color: rgba(217, 179, 106, 0.09); z-index: -1;
     }
     .eyebrow {
       display: inline-flex; align-items: center; gap: 8px;
-      color: var(--gold-2); text-transform: uppercase;
-      font-weight: 800; letter-spacing: 0.18em; font-size: 0.73rem;
+      color: var(--gold-2); text-transform: uppercase; font-weight: 800; letter-spacing: 0.18em; font-size: 0.73rem;
     }
     .eyebrow::before {
       content: ""; width: 28px; height: 1px;
-      background: linear-gradient(90deg, var(--gold), transparent);
-      display: inline-block;
+      background: linear-gradient(90deg, var(--gold), transparent); display: inline-block;
     }
     h1, h2, h3 { margin: 0; font-family: "Cinzel", serif; line-height: 0.95; letter-spacing: 0.01em; }
     h1 {
-      margin-top: 10px; font-size: clamp(2.4rem, 5vw, 4.6rem);
-      font-weight: 800; color: var(--ink); text-wrap: balance;
+      margin-top: 10px; font-size: clamp(2.4rem, 5vw, 4.6rem); font-weight: 800; color: var(--ink); text-wrap: balance;
     }
     .sub { margin-top: 12px; color: var(--muted); line-height: 1.55; max-width: 34ch; font-size: 0.98rem; }
     .setup { padding: 20px; display: grid; gap: 16px; }
     .setup-grid { display: grid; gap: 14px; }
     label {
-      display: block; font-size: 0.82rem; text-transform: uppercase;
-      letter-spacing: 0.12em; color: var(--gold-2); font-weight: 700; margin-bottom: 8px;
+      display: block; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--gold-2); font-weight: 700; margin-bottom: 8px;
     }
     input, textarea, select {
       width: 100%; outline: none;
-      background: rgba(255, 248, 239, 0.055);
-      color: var(--ink);
-      border: 1px solid rgba(217, 179, 106, 0.18);
-      border-radius: 16px; padding: 14px; font: inherit; transition: 0.2s ease;
+      background: rgba(255, 248, 239, 0.055); color: var(--ink);
+      border: 1px solid rgba(217, 179, 106, 0.18); border-radius: 16px; padding: 14px;
+      font: inherit; transition: 0.2s ease;
     }
     textarea { min-height: 112px; resize: vertical; }
     select option { background: var(--bg-2); color: var(--ink); }
@@ -108,37 +100,32 @@
     .hint { color: var(--ash); font-size: 0.85rem; line-height: 1.45; margin-top: 6px; }
     .btn-row { display: flex; flex-wrap: wrap; gap: 10px; }
     button {
-      appearance: none; border: none; cursor: pointer; font: inherit;
-      border-radius: 16px; color: var(--ink);
+      appearance: none; border: none; cursor: pointer; font: inherit; border-radius: 16px; color: var(--ink);
       transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease, opacity 0.18s ease;
     }
     button:hover { transform: translateY(-2px); }
     button:active { transform: translateY(0) scale(0.98); }
     button:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
     .btn-primary {
-      background: linear-gradient(180deg, var(--gold-2), var(--gold));
-      color: #2e2110; font-weight: 800; padding: 13px 18px;
+      background: linear-gradient(180deg, var(--gold-2), var(--gold)); color: #2e2110; font-weight: 800; padding: 13px 18px;
       box-shadow: 0 14px 28px rgba(217, 179, 106, 0.22);
     }
     .btn-secondary {
-      background: rgba(255, 248, 239, 0.06);
-      border: 1px solid rgba(217, 179, 106, 0.16);
-      padding: 12px 15px; font-weight: 700;
+      background: rgba(255, 248, 239, 0.06); border: 1px solid rgba(217, 179, 106, 0.16); padding: 12px 15px; font-weight: 700;
     }
     .status { padding: 18px 20px 20px; display: grid; gap: 14px; }
     .status-top { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
     .metric {
       padding: 16px; border-radius: 18px;
       background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
-      border: 1px solid rgba(217, 179, 106, 0.14);
-      min-height: 94px; display: flex; flex-direction: column; justify-content: space-between;
+      border: 1px solid rgba(217, 179, 106, 0.14); min-height: 94px;
+      display: flex; flex-direction: column; justify-content: space-between;
     }
     .metric span { color: var(--muted); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.13em; font-weight: 700; }
     .metric strong { font-size: clamp(1.35rem, 2vw, 2rem); font-weight: 800; color: var(--ink); }
     .current-turn {
       display: grid; grid-template-columns: auto 1fr auto; gap: 14px; align-items: center;
-      padding: 16px 18px; border-radius: 20px;
-      border: 1px solid rgba(217, 179, 106, 0.16);
+      padding: 16px 18px; border-radius: 20px; border: 1px solid rgba(217, 179, 106, 0.16);
       background: linear-gradient(90deg, rgba(217, 179, 106, 0.09), rgba(255, 255, 255, 0.02));
     }
     .player-chip {
@@ -152,17 +139,18 @@
     .board-head { display: flex; justify-content: space-between; align-items: end; gap: 12px; padding: 4px 6px 0; }
     .board-head p { margin: 8px 0 0; color: var(--muted); font-size: 0.92rem; max-width: 44ch; line-height: 1.5; }
     .board-wrap { display: grid; place-items: center; padding: 8px 8px 4px; }
-    .board-box { width: min(100%, 660px); aspect-ratio: 1; position: relative; display: grid; place-items: center; filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.45)); }
+    .board-box {
+      width: min(100%, 660px); aspect-ratio: 1; position: relative;
+      display: grid; place-items: center; filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.45));
+    }
     svg { display: block; width: 100%; height: 100%; }
     .legend { display: flex; flex-wrap: wrap; gap: 10px; padding: 4px 6px 0; }
     .controls { padding: 18px; display: grid; gap: 14px; }
     .controls-header { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
     .mode-pills { display: flex; gap: 8px; flex-wrap: wrap; }
     .pill {
-      padding: 10px 14px; border-radius: 999px;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(217, 179, 106, 0.14);
-      color: var(--stone); font-weight: 800; letter-spacing: 0.04em;
+      padding: 10px 14px; border-radius: 999px; background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(217, 179, 106, 0.14); color: var(--stone); font-weight: 800; letter-spacing: 0.04em;
     }
     .pill.active {
       background: linear-gradient(180deg, rgba(217, 179, 106, 0.22), rgba(217, 179, 106, 0.12));
@@ -170,22 +158,31 @@
     }
     .number-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; }
     .dart-btn {
-      min-height: 58px; border-radius: 18px; font-weight: 800; font-size: 1rem;
-      position: relative; overflow: hidden;
+      min-height: 58px; border-radius: 18px; font-weight: 800; font-size: 1rem; position: relative; overflow: hidden;
       background: linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.018));
       border: 1px solid rgba(217, 179, 106, 0.14); color: var(--ink);
     }
-    .dart-btn.special { background: linear-gradient(180deg, rgba(143, 45, 33, 0.28), rgba(143, 45, 33, 0.12)); border-color: rgba(186, 76, 59, 0.28); }
-    .dart-btn.utility { background: linear-gradient(180deg, rgba(47, 93, 71, 0.25), rgba(47, 93, 71, 0.1)); border-color: rgba(98, 170, 133, 0.18); }
+    .dart-btn.special {
+      background: linear-gradient(180deg, rgba(143, 45, 33, 0.28), rgba(143, 45, 33, 0.12));
+      border-color: rgba(186, 76, 59, 0.28);
+    }
+    .dart-btn.utility {
+      background: linear-gradient(180deg, rgba(47, 93, 71, 0.25), rgba(47, 93, 71, 0.1));
+      border-color: rgba(98, 170, 133, 0.18);
+    }
     .action-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
     .scoreboard { padding: 18px; display: grid; gap: 14px; }
     .score-list { display: grid; gap: 10px; }
     .score-item {
       border-radius: 20px; border: 1px solid rgba(217, 179, 106, 0.14);
       background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
-      padding: 14px; display: grid; gap: 12px; transition: transform 0.2s ease, border-color 0.2s ease;
+      padding: 14px; display: grid; gap: 12px;
+      transition: transform 0.2s ease, border-color 0.2s ease;
     }
-    .score-item.active { border-color: rgba(241, 210, 154, 0.45); transform: translateY(-2px); box-shadow: 0 14px 28px rgba(0, 0, 0, 0.18); }
+    .score-item.active {
+      border-color: rgba(241, 210, 154, 0.45); transform: translateY(-2px);
+      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.18);
+    }
     .score-top { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 12px; }
     .score-name { font-weight: 800; font-size: 1rem; }
     .score-meta { color: var(--muted); font-size: 0.84rem; line-height: 1.35; }
@@ -196,7 +193,10 @@
       padding: 0 10px; font-size: 0.85rem; font-weight: 800; color: #160f09; position: relative;
       border: 1px solid rgba(255, 255, 255, 0.22);
     }
-    .mini-seg.shielded::after { content: "✦"; position: absolute; top: -6px; right: -2px; font-size: 0.76rem; color: var(--gold-2); text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5); }
+    .mini-seg.shielded::after {
+      content: "✦"; position: absolute; top: -6px; right: -2px; font-size: 0.76rem;
+      color: var(--gold-2); text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+    }
     .empty-state { color: var(--ash); font-size: 0.92rem; padding: 6px 0 2px; }
     .feed { padding: 18px; display: grid; gap: 12px; }
     .feed-list { max-height: 310px; overflow: auto; display: grid; gap: 10px; padding-right: 4px; }
@@ -204,7 +204,10 @@
       padding: 12px 13px; border-radius: 16px; background: rgba(255, 255, 255, 0.035);
       border: 1px solid rgba(217, 179, 106, 0.12); color: var(--stone); line-height: 1.45; font-size: 0.92rem;
     }
-    .modal { position: fixed; inset: 0; display: none; place-items: center; padding: 18px; background: rgba(8, 8, 10, 0.62); backdrop-filter: blur(10px); z-index: 30; }
+    .modal {
+      position: fixed; inset: 0; display: none; place-items: center; padding: 18px;
+      background: rgba(8, 8, 10, 0.62); backdrop-filter: blur(10px); z-index: 30;
+    }
     .modal.open { display: grid; }
     .modal-card {
       width: min(680px, 100%); border-radius: 28px; border: 1px solid rgba(217, 179, 106, 0.18);
@@ -213,7 +216,10 @@
     }
     .modal-card h2 { font-size: clamp(2rem, 4vw, 3.4rem); color: var(--gold-2); }
     .winners { margin-top: 18px; display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; }
-    .winner-chip { padding: 10px 14px; border-radius: 999px; font-weight: 800; color: #180f08; border: 1px solid rgba(255, 255, 255, 0.24); }
+    .winner-chip {
+      padding: 10px 14px; border-radius: 999px; font-weight: 800; color: #180f08;
+      border: 1px solid rgba(255, 255, 255, 0.24);
+    }
     .small { color: var(--muted); font-size: 0.92rem; line-height: 1.55; margin-top: 10px; }
     .section-title { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
     .section-title h3 { font-size: 1.28rem; color: var(--stone); }
@@ -245,6 +251,12 @@
             <label for="roundCount">Rounds (6–20)</label>
             <input id="roundCount" type="number" min="6" max="20" value="6" />
             <div class="hint">The game concludes after selected rounds.</div>
+          </div>
+          <div>
+            <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; text-transform: none; font-weight: 600; font-size: 0.9rem;">
+              <input id="randomizeOrder" type="checkbox" style="width: auto; accent-color: var(--gold);" />
+              Randomize player order on start
+            </label>
           </div>
           <div class="btn-row">
             <button id="startBtn" class="btn-primary">Start Quad Empire</button>
@@ -378,6 +390,7 @@
     const els = {
       playerNames: document.getElementById("playerNames"),
       roundCount: document.getElementById("roundCount"),
+      randomizeOrder: document.getElementById("randomizeOrder"),
       startBtn: document.getElementById("startBtn"),
       resetBtn: document.getElementById("resetBtn"),
       roundDisplay: document.getElementById("roundDisplay"),
@@ -406,7 +419,9 @@
       quadMode: document.getElementById("quadMode")
     };
 
-    function deepClone(obj) { return JSON.parse(JSON.stringify(obj)); }
+    function deepClone(obj) {
+      return JSON.parse(JSON.stringify(obj));
+    }
 
     function initBoard() {
       const board = {};
@@ -442,7 +457,10 @@
       renderAll();
     }
 
-    function getCurrentPlayer() { return state.players[state.currentPlayerIndex] || null; }
+    function getCurrentPlayer() {
+      return state.players[state.currentPlayerIndex] || null;
+    }
+
     function playerColor(playerId) {
       const p = state.players.find((x) => x.id === playerId);
       return p ? p.color : "#333235";
@@ -470,11 +488,21 @@
       rounds = Math.max(6, Math.min(20, rounds));
       els.roundCount.value = rounds;
 
-      state.players = names.map((name, i) => ({
+      let playerList = names.map((name, i) => ({
         id: "p" + (i + 1),
         name,
         color: PLAYER_COLORS[i % PLAYER_COLORS.length]
       }));
+
+      // Randomize order if checkbox is checked
+      if (els.randomizeOrder && els.randomizeOrder.checked) {
+        for (let i = playerList.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [playerList[i], playerList[j]] = [playerList[j], playerList[i]];
+        }
+      }
+
+      state.players = playerList;
       state.totalRounds = rounds;
       state.currentPlayerIndex = 0;
       state.currentRound = 1;
@@ -486,8 +514,8 @@
       state.board = initBoard();
       state.history = [];
       state.log = [];
-
-      addLog(`Quad Campaign begins! " + state.players.map((p) => p.name).join(", ") + " enter the arena.`);
+      
+      addLog(`Quad Campaign begins! ` + state.players.map((p) => p.name).join(", ") + ` enter the arena.`);
       renderAll();
     }
 
@@ -541,7 +569,6 @@
         return;
       }
       pushHistory();
-
       const player = getCurrentPlayer();
       const playerId = player.id;
       let message = "";
@@ -554,11 +581,8 @@
       } else {
         const num = Number(target);
         const seg = state.board[num];
-
         if (seg.shield) {
-          // Segment is currently shielded
           const defenderName = seg.owner ? (state.players.find((p) => p.id === seg.owner)?.name || "Enemy") : "Unknown";
-          
           if (multiplier === 4) {
             seg.owner = playerId;
             seg.shield = true;
@@ -575,7 +599,6 @@
             message = `${player.name} hit Single ${num} against ${defenderName}'s shielded segment. Hit repelled!`;
           }
         } else if (seg.owner === null) {
-          // Unclaimed segment
           seg.owner = playerId;
           if (multiplier >= 2) {
             seg.shield = true;
@@ -585,11 +608,9 @@
             message = `${player.name} claimed ${formatHit(multiplier, num)} for the empire.`;
           }
         } else if (seg.owner === playerId) {
-          // Already owned by the active player
           seg.shield = true;
           message = `${player.name} reinforced ${formatHit(multiplier, num)} and activated its shield.`;
         } else {
-          // Owned by an opponent, but unshielded (1 hit to claim, higher hits handle frees/shields)
           const defenderName = state.players.find((p) => p.id === seg.owner)?.name || "Enemy";
           if (multiplier === 4) {
             seg.owner = playerId;
@@ -651,6 +672,7 @@
       } else {
         els.winnerSummary.textContent = `${winners[0].player.name} reigns supreme with ${topScore} segment(s) claimed (${winners[0].pct}% of the quad board).`;
       }
+
       els.winnerChips.innerHTML = winners.map((w) => `<div class="winner-chip" style="background:${w.player.color}">${w.player.name}</div>`).join("");
       els.winnerModal.classList.add("open");
       els.winnerModal.setAttribute("aria-hidden", "false");
@@ -661,7 +683,6 @@
     function renderAll() {
       const activePlayer = getCurrentPlayer();
       setMultiplier(state.activeMultiplier);
-
       els.roundDisplay.textContent = state.gameStarted ? `${state.currentRound} / ${state.totalRounds}` : "—";
       els.dartCountDisplay.textContent = state.dartsThrown;
       els.throwsLeftDisplay.textContent = state.gameStarted ? `${DARTS_PER_TURN - state.dartsThisTurn}` : "—";
@@ -781,8 +802,8 @@
         const x2 = Math.cos(a2) * rOuter, y2 = Math.sin(a2) * rOuter;
         const x3 = Math.cos(a2) * rInner, y3 = Math.sin(a2) * rInner;
         const x4 = Math.cos(a1) * rInner, y4 = Math.sin(a1) * rInner;
-
         const d = `M ${x1} ${y1} A ${rOuter} ${rOuter} 0 0 1 ${x2} ${y2} L ${x3} ${y3} A ${rInner} ${rInner} 0 0 0 ${x4} ${y4} Z`;
+
         path.setAttribute("d", d);
         path.setAttribute("fill", color);
         path.setAttribute("stroke", seg.shield ? "#f1d29a" : "rgba(217,179,106,0.22)");
