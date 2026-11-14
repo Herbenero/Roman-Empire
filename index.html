@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Roman Empire - Quad Board</title>
-  <meta name="description" content="Roman Empire dart game webapp optimized for the Quad Board with custom shield and attack rules." />
+  <title>Roman Empire - Darts</title>
+  <meta name="description" content="Roman Empire dart game webapp for Standard and Quad Boards with shield and attack rules." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -132,6 +132,10 @@
       border-color: rgba(241, 210, 154, 0.58);
       box-shadow: 0 0 0 4px rgba(217, 179, 106, 0.12);
       transform: translateY(-1px);
+    }
+    input:disabled, textarea:disabled, select:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
     }
     .hint { color: var(--ash); font-size: 0.85rem; line-height: 1.45; margin-top: 6px; }
     .btn-row { display: flex; flex-wrap: wrap; gap: 10px; }
@@ -380,18 +384,26 @@
       <div class="panel brand">
         <div class="eyebrow">Hellcastle Archery Arena</div>
         <h1>Roman Empire</h1>
-        <p class="sub">Quad Board Campaign: Conquer numbers, fortify territory with shields, and leverage doubles, triples, and quads to crack enemy defenses.</p>
+        <p class="sub" id="heroSub">Board Campaign: Conquer numbers, fortify territory with shields, and leverage multipliers to crack enemy defenses.</p>
       </div>
       <section class="panel setup" aria-labelledby="setupTitle">
         <div class="section-title">
           <h3 id="setupTitle">Game Setup</h3>
-          <span class="ghost">Quad Edition</span>
+          <span class="ghost" id="setupBadge">Quad Edition</span>
         </div>
         <div class="setup-grid">
           <div>
             <label for="playerNames">Players</label>
             <textarea id="playerNames" placeholder="Enter one player per line&#10;Kelly&#10;Herb&#10;"></textarea>
             <div class="hint">Each player gets a unique empire color.</div>
+          </div>
+          <div>
+            <label for="boardTypeSelect">Board Type</label>
+            <select id="boardTypeSelect">
+              <option value="quad">Quad Board</option>
+              <option value="standard">Standard Board</option>
+            </select>
+            <div class="hint">Standard Board disables the 4× Quad multiplier option.</div>
           </div>
           <div>
             <label for="roundCount">Rounds (6–20)</label>
@@ -404,7 +416,7 @@
             </label>
           </div>
           <div class="btn-row">
-            <button id="startBtn" class="btn-primary">Start Quad Empire</button>
+            <button id="startBtn" class="btn-primary">Start Empire</button>
             <button id="resetBtn" class="btn-secondary">Reset</button>
           </div>
         </div>
@@ -443,14 +455,14 @@
       <section class="panel board-shell" aria-labelledby="boardTitle">
         <div class="board-head">
           <div>
-            <div class="eyebrow">Quad Arena</div>
+            <div class="eyebrow" id="boardEyebrow">Quad Arena</div>
             <h3 id="boardTitle">Imperial Quad Dartboard</h3>
             <p>Shields glow with a gold ring (✦). Bullseye shields all segments owned by the active player.</p>
           </div>
         </div>
         <div class="board-wrap">
           <div class="board-box">
-            <svg id="dartboard" viewBox="-260 -260 520 520" role="img" aria-label="Interactive Roman Empire Quad dartboard"></svg>
+            <svg id="dartboard" viewBox="-260 -260 520 520" role="img" aria-label="Interactive Roman Empire dartboard"></svg>
           </div>
         </div>
         <div class="legend" id="legend"></div>
@@ -459,7 +471,7 @@
         <div class="controls-header">
           <div>
             <div class="eyebrow">Single Dart Input</div>
-            <h3 id="controlsTitle">Strike the Quad Board</h3>
+            <h3 id="controlsTitle">Strike the Board</h3>
           </div>
           <div class="mode-pills" aria-label="Multiplier controls">
             <button class="pill active" data-multiplier="1" id="singleMode" type="button">1× Single</button>
@@ -545,6 +557,7 @@
 
     const state = {
       players: [],
+      boardType: "quad", // "quad" | "standard"
       totalRounds: 6,
       currentPlayerIndex: 0,
       currentRound: 1,
@@ -560,10 +573,15 @@
 
     const els = {
       playerNames: document.getElementById("playerNames"),
+      boardTypeSelect: document.getElementById("boardTypeSelect"),
       roundCount: document.getElementById("roundCount"),
       randomizeOrder: document.getElementById("randomizeOrder"),
       startBtn: document.getElementById("startBtn"),
       resetBtn: document.getElementById("resetBtn"),
+      setupBadge: document.getElementById("setupBadge"),
+      boardEyebrow: document.getElementById("boardEyebrow"),
+      boardTitle: document.getElementById("boardTitle"),
+      controlsTitle: document.getElementById("controlsTitle"),
       roundDisplay: document.getElementById("roundDisplay"),
       dartCountDisplay: document.getElementById("dartCountDisplay"),
       throwsLeftDisplay: document.getElementById("throwsLeftDisplay"),
@@ -627,6 +645,7 @@
       }
 
       const selectedLeague = els.targetLeagueSelect ? els.targetLeagueSelect.value.trim() : "Royal Couple";
+      const boardLabel = state.boardType === "quad" ? "Quad Board" : "Standard Board";
 
       const rankedPlayers = state.players
         .map(p => {
@@ -636,7 +655,7 @@
           return {
             name: p.name,
             score: owned.length,
-            notes: `${owned.length}/20 segments (${pct}%), ${shieldedCount} shielded`
+            notes: `${owned.length}/20 segments (${pct}%), ${shieldedCount} shielded [${boardLabel}]`
           };
         })
         .sort((a, b) => b.score - a.score);
@@ -684,6 +703,7 @@
     function pushHistory() {
       state.history.push(deepClone({
         players: state.players,
+        boardType: state.boardType,
         totalRounds: state.totalRounds,
         currentPlayerIndex: state.currentPlayerIndex,
         currentRound: state.currentRound,
@@ -740,6 +760,9 @@
       rounds = Math.max(6, Math.min(20, rounds));
       els.roundCount.value = rounds;
 
+      const selectedBoard = els.boardTypeSelect ? els.boardTypeSelect.value : "quad";
+      state.boardType = selectedBoard === "standard" ? "standard" : "quad";
+
       let playerList = names.map((name, i) => ({
         id: "p" + (i + 1),
         name,
@@ -766,12 +789,15 @@
       state.history = [];
       state.log = [];
 
-      addLog(`Quad Campaign begins! ` + state.players.map((p) => p.name).join(", ") + ` enter the arena.`);
+      const modeLabel = state.boardType === "quad" ? "Quad Board" : "Standard Board";
+      addLog(`${modeLabel} Campaign begins! ` + state.players.map((p) => p.name).join(", ") + ` enter the arena.`);
       renderAll();
     }
 
     function resetGame() {
+      const keptBoardType = els.boardTypeSelect ? els.boardTypeSelect.value : "quad";
       state.players = [];
+      state.boardType = keptBoardType === "standard" ? "standard" : "quad";
       state.totalRounds = 6;
       state.currentPlayerIndex = 0;
       state.currentRound = 1;
@@ -796,6 +822,10 @@
     }
 
     function setMultiplier(mult) {
+      // Prevent selecting 4x Quad if on Standard Board
+      if (state.boardType === "standard" && mult === 4) {
+        mult = 1;
+      }
       state.activeMultiplier = mult;
       [els.singleMode, els.doubleMode, els.tripleMode, els.quadMode].forEach((btn) => {
         if (btn) {
@@ -820,6 +850,10 @@
       if (state.dartsThisTurn >= DARTS_PER_TURN) {
         alert(`You have already thrown ${DARTS_PER_TURN} darts this turn. Please advance to the next player.`);
         return;
+      }
+
+      if (state.boardType === "standard" && multiplier === 4) {
+        multiplier = 1;
       }
 
       pushHistory();
@@ -929,11 +963,12 @@
       scores.sort((a, b) => b.count - a.count);
       const topScore = scores[0].count;
       const winners = scores.filter((s) => s.count === topScore);
+      const boardText = state.boardType === "quad" ? "quad board" : "standard board";
 
       if (winners.length > 1) {
-        els.winnerSummary.textContent = `A tied quad empire victory! Multiple rulers claimed ${topScore} segment(s) (${((topScore / 20) * 100).toFixed(1)}%).`;
+        els.winnerSummary.textContent = `A tied empire victory! Multiple rulers claimed ${topScore} segment(s) (${((topScore / 20) * 100).toFixed(1)}%).`;
       } else {
-        els.winnerSummary.textContent = `${winners[0].player.name} reigns supreme with ${topScore} segment(s) claimed (${winners[0].pct}% of the quad board).`;
+        els.winnerSummary.textContent = `${winners[0].player.name} reigns supreme with ${topScore} segment(s) claimed (${winners[0].pct}% of the ${boardText}).`;
       }
 
       els.winnerChips.innerHTML = winners
@@ -963,6 +998,8 @@
     function renderBoard() {
       const svg = els.dartboard;
       if (!svg) return;
+      const isQuad = state.boardType === "quad";
+
       let html = `
         <circle cx="0" cy="0" r="245" fill="#141315" stroke="rgba(217,179,106,0.35)" stroke-width="2" />
         <circle cx="0" cy="0" r="212" fill="#1b1918" stroke="rgba(217,179,106,0.22)" stroke-width="1.5" />
@@ -980,10 +1017,14 @@
         const wedgePath = buildWedgePath(36, 210, startDeg, endDeg);
         html += `<path d="${wedgePath}" fill="${ownerColor}" fill-opacity="${seg.owner ? '0.88' : '1'}" stroke="${strokeColor}" stroke-width="${strokeWidth}" style="cursor:pointer" data-seg="${num}" />`;
 
-        // Quad, Triple, and Double ring lines
+        // Double and Triple ring lines (always shown)
         html += `<path d="${buildWedgePath(195, 210, startDeg, endDeg)}" fill="none" stroke="rgba(255,255,255,0.16)" stroke-width="0.9" pointer-events="none" />`;
         html += `<path d="${buildWedgePath(128, 142, startDeg, endDeg)}" fill="none" stroke="rgba(255,255,255,0.16)" stroke-width="0.9" pointer-events="none" />`;
-        html += `<path d="${buildWedgePath(84, 96, startDeg, endDeg)}" fill="none" stroke="rgba(255,255,255,0.16)" stroke-width="0.9" pointer-events="none" />`;
+
+        // Quad ring line (shown only on Quad Board)
+        if (isQuad) {
+          html += `<path d="${buildWedgePath(84, 96, startDeg, endDeg)}" fill="none" stroke="rgba(255,255,255,0.16)" stroke-width="0.9" pointer-events="none" />`;
+        }
 
         const labelPos = polarToCartesian(228, midDeg);
         html += `<text x="${labelPos.x.toFixed(1)}" y="${labelPos.y.toFixed(1)}" fill="#f6ead6" font-size="13" font-weight="800" text-anchor="middle" dominant-baseline="central" pointer-events="none">${num}</text>`;
@@ -1081,6 +1122,30 @@
     }
 
     function renderAll() {
+      const isQuad = state.boardType === "quad";
+      if (els.boardTypeSelect) {
+        els.boardTypeSelect.value = state.boardType;
+        els.boardTypeSelect.disabled = state.gameStarted;
+      }
+      if (els.quadMode) {
+        els.quadMode.style.display = isQuad ? "" : "none";
+      }
+      if (els.setupBadge) {
+        els.setupBadge.textContent = isQuad ? "Quad Edition" : "Standard Edition";
+      }
+      if (els.boardEyebrow) {
+        els.boardEyebrow.textContent = isQuad ? "Quad Arena" : "Standard Arena";
+      }
+      if (els.boardTitle) {
+        els.boardTitle.textContent = isQuad ? "Imperial Quad Dartboard" : "Imperial Standard Dartboard";
+      }
+      if (els.controlsTitle) {
+        els.controlsTitle.textContent = isQuad ? "Strike the Quad Board" : "Strike the Board";
+      }
+      if (els.startBtn) {
+        els.startBtn.textContent = isQuad ? "Start Quad Empire" : "Start Standard Empire";
+      }
+
       const activePlayer = getCurrentPlayer();
       setMultiplier(state.activeMultiplier);
 
@@ -1118,6 +1183,15 @@
     }
 
     // Event Listeners
+    els.boardTypeSelect.addEventListener("change", () => {
+      if (state.gameStarted) return;
+      state.boardType = els.boardTypeSelect.value === "standard" ? "standard" : "quad";
+      if (state.boardType === "standard" && state.activeMultiplier === 4) {
+        state.activeMultiplier = 1;
+      }
+      renderAll();
+    });
+
     els.startBtn.addEventListener("click", startGame);
     els.resetBtn.addEventListener("click", resetGame);
     els.undoBtn.addEventListener("click", undoLast);
